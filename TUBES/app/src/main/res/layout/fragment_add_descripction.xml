@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="600px"
+        android:layout_height="400px"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv_photo_detail"
+        android:src="@drawable/img_icon"
+        android:layout_marginTop="40dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_photo_detail"
+        android:id="@+id/text_description"
+        android:text="Description"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_description"
+        android:id="@+id/et_description"
+        android:background="@drawable/edit_text_border"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:hint="Description..."
+        android:textColorHint="@color/gray"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_description"
+        android:id="@+id/text_story"
+        android:text="Story"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="30dp"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_story"
+        android:id="@+id/et_story"
+        android:background="@drawable/edit_text_border"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:hint="Story..."
+        android:textColorHint="@color/gray"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_save"
+        android:text="Save"
+        android:textSize="20dp"
+        android:padding="15dp"
+        android:backgroundTint="@color/orange"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>

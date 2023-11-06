@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         val textHome = findViewById<TextView>(R.id.text_home)
         textHome.setOnClickListener {
-            changePage(MainFragment())
+            changePage(DetailFragment())
             drawer.closeDrawer(GravityCompat.START)
         }
 
