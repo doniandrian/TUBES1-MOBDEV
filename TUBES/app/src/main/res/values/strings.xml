@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TUBES</string>
+    <string name="openDrawer">Open</string>
+    <string name="closeDrawer">Close</string>
+</resources>
