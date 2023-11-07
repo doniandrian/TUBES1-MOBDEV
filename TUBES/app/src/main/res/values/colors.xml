@@ -11,5 +11,7 @@
     <color name="pink">#DE3163</color>
     <color name="yellow_94">#f6de94</color>
     <color name="light_blue">#aecbfa</color>
-
+    <color name="light_blue_e5">#34c3e5</color>
+    <color name="gray_ef">#7Fefefef</color>
+    <color name="transparent">#00000000</color>
 </resources>
