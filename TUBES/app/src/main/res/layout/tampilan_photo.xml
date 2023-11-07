@@ -17,30 +17,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/neon"/>
-<!--                app:shapeAppearanceOverlay="@style/roundedImageViewStyle"-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_photo"
                     android:layout_marginTop="130dp"
                     android:textStyle="bold"
-
-                    android:text="Title Text"
+                    android:id="@+id/foto_judul"
+                    android:text="@string/judul_foto"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     android:padding="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/foto_judul"
+                    android:id="@+id/tanggal_foto"
+                    android:layout_marginTop="150dp"
+                    android:padding="8dp"
+                    android:text="Tanggal Foto"
+                    android:textSize="18sp"
+                    android:textColor="@color/light_blue_e5"
+                    android:textStyle="bold"/>
+
+
         </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </RelativeLayout>

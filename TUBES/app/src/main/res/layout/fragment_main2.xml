@@ -15,11 +15,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"/>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
-        android:id="@+id/ls_photo"
+        android:id="@+id/rv_photo"
         tools:listitem="@layout/tampilan_photo"
         />
 

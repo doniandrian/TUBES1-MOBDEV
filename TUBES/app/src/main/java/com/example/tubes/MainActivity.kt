@@ -2,6 +2,8 @@ package com.example.tubes
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,6 +13,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 class MainActivity : AppCompatActivity() {
     private val fragmentManager: FragmentManager = supportFragmentManager
@@ -29,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         drawer.addDrawerListener(abdt)
         abdt.syncState()
 
-        fragmentTransaction.replace(R.id.fragment_container, MainFragment())
+        fragmentTransaction.replace(R.id.fragment_container, MainFragment2())
         fragmentTransaction.commit()
 
         val leftDrawer = findViewById<RelativeLayout>(R.id.left_drawer)
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
 
     fun changePage(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
