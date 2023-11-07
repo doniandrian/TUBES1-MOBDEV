@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:id="@+id/ls_photo"
-        android:layout_margin="15dp"/>
+        tools:listitem="@layout/tampilan_photo"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
