@@ -9,15 +9,14 @@
         android:layout_width="600px"
         android:layout_height="400px"
         android:layout_centerHorizontal="true"
-        android:id="@+id/iv_photo_detail"
-        android:src="@drawable/img_icon"
+        android:id="@+id/iv_photo_add_desc"
         android:layout_marginTop="40dp" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_photo_detail"
+        android:layout_below="@id/iv_photo_add_desc"
         android:id="@+id/text_description"
         android:text="Description"
         android:textSize="20dp"

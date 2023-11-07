@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="wrap_content"
-        android:layout_height="500px"
+        android:layout_height="700px"
+        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
+        app:shapeAppearanceOverlay="@style/RoundedSquare"
         android:id="@+id/iv_photo" />
 
 </RelativeLayout>
