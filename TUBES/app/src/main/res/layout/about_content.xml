@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginVertical="31dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/arrow_left_white_icon"
+        android:translationZ="2dp" />
+
+    <TextView
+        android:id="@+id/textAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_blue"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="About"
+        android:textColor="@color/white"
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/textPhotoDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textAbout"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Photo Diary"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPhotoDiary"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Version 1.0"
+        android:textColor="@color/gray"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textDeskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textVersion"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Photo Diary adalah aplikasi yang dapat membantu untuk menyimpan dan berinteraksi dengan foto Anda.
+Aplikasi ini dapat berfungsi sebagai kamera ponsel, galeri penyimpanan foto, serta buku harian untuk setiap foto Anda."
+
+        android:textSize="17dp"
+        android:textStyle="bold" />
+</RelativeLayout>
