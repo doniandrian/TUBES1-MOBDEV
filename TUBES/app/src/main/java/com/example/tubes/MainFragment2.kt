@@ -15,8 +15,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
-class MainFragment : Fragment() {
+class MainFragment2 : Fragment() {
+    private lateinit var photoList: MutableList<PhotoItem>
+    private lateinit var rv_photo: RecyclerView
+    private lateinit var btn_cam: FloatingActionButton
+    private lateinit var imageUri: Uri
+    private lateinit var penyimpananFoto: PenyimpananFoto
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -27,43 +35,46 @@ class MainFragment : Fragment() {
     }
 
 
-    private lateinit var photoList: MutableList<PhotoItem>
-    private lateinit var adapter: PhotoListAdapter
-    private lateinit var listView: ListView
-    private lateinit var btn_cam: FloatingActionButton
-    private lateinit var imageUri: Uri
-    private lateinit var penyimpananFoto: PenyimpananFoto
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-
+        val view = inflater.inflate(R.layout.fragment_main2, container, false)
         val activity = activity as MainActivity
-
         photoList = mutableListOf()
-        listView = view.findViewById(R.id.ls_photo)
-        btn_cam = view.findViewById(R.id.btn_cam)
-
-        adapter = PhotoListAdapter(activity, photoList)
-        listView.adapter = adapter
-
-        // Initialize the PhotoStorageManager
         penyimpananFoto = PenyimpananFoto(activity)
         val savedUri = penyimpananFoto.loadImageUri()
         if (savedUri != null) {
             val photoItem = PhotoItem(savedUri)
             photoList.add(photoItem)
-            adapter.notifyDataSetChanged()
+
         }
+
+        rv_photo = view.findViewById(R.id.rv_photo)
+        rv_photo.setHasFixedSize(true)
+
+
+        rv_photo.layoutManager = LinearLayoutManager(requireContext())
+        val listPhotoAdapter = PhotoListAdapter2(photoList)
+        rv_photo.adapter = listPhotoAdapter
+
+        rv_photo.itemAnimator = null
+
+
+
+        btn_cam = view.findViewById(R.id.btn_cam)
+
+
+
+
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
                 val photoItem = PhotoItem(imageUri.toString())
-                photoList.add(photoItem)
-                adapter.notifyDataSetChanged()
+                listPhotoAdapter.addPhoto(photoItem)
                 penyimpananFoto.saveImageUri(imageUri.toString())
             }
         }
@@ -83,13 +94,14 @@ class MainFragment : Fragment() {
     }
 
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_list -> {
-                TODO()
+                rv_photo.layoutManager = LinearLayoutManager(requireContext())
             }
             R.id.action_grid -> {
-                TODO()
+                rv_photo.layoutManager = GridLayoutManager(requireContext(), 2)
             }
         }
         return super.onOptionsItemSelected(item)

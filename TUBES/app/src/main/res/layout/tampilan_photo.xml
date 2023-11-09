@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="30dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_photo"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/neon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_photo"
+                    android:layout_marginTop="130dp"
+                    android:textStyle="bold"
+                    android:id="@+id/foto_judul"
+                    android:text="@string/judul_foto"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:padding="8dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/foto_judul"
+                    android:id="@+id/tanggal_foto"
+                    android:layout_marginTop="150dp"
+                    android:padding="8dp"
+                    android:text="Tanggal Foto"
+                    android:textSize="18sp"
+                    android:textColor="@color/light_blue_e5"
+                    android:textStyle="bold"/>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
