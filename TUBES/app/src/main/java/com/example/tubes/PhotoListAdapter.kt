@@ -22,7 +22,7 @@ class PhotoListAdapter(private val activity: Activity, private val portofolioLis
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
-        val view: View = activity.layoutInflater.inflate(R.layout.item_list_photo, null)
+        val view: View = activity.layoutInflater.inflate(R.layout.tampilan_photo, null)
         val viewHolder: ViewHolder = ViewHolder(view)
 
         val photoItem = getItem(i) as PhotoItem

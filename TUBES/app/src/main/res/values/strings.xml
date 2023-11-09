@@ -2,5 +2,9 @@
     <string name="app_name">TUBES</string>
     <string name="openDrawer">Open</string>
     <string name="closeDrawer">Close</string>
+    <string name="list">list</string>
+    <string name="grid">grid</string>
     <string name="fontSize">Font Size</string>
+    <string name="judul_foto">Judul Foto</string>
+    <string name="diary_list">Diary List</string>
 </resources>
