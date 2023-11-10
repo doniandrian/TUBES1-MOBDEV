@@ -34,25 +34,13 @@
         android:textSize="30dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textPhotoDiary"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="-10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Version 1.0"
-        android:textColor="@color/gray"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/textDeskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textVersion"
+        android:layout_below="@+id/textPhotoDiary"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
@@ -60,5 +48,7 @@
 Aplikasi ini dapat berfungsi sebagai kamera ponsel, galeri penyimpanan foto, serta buku harian untuk setiap foto Anda."
 
         android:textSize="17dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="-15dp"
+        />
 </RelativeLayout>
