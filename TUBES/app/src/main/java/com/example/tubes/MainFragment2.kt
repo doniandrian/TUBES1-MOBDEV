@@ -63,6 +63,7 @@ class MainFragment2 : Fragment() {
 
 
         val tanggal = "2023"
+        val judul = ""
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->

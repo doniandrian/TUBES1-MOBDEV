@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
+import androidx.lifecycle.ViewModelProvider
 import com.example.tubes.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,8 +29,9 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
     private lateinit var presenter: MainPresenter
-    private lateinit var communicator: Communicator
-    var judul: String? = ""
+    private lateinit var sharedViewModel: SharedData
+    private lateinit var detailList: MutableList<DetailItem>
+    private lateinit var penyimpananDetail: PenyimpananDetail
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +40,7 @@ class MainFragment : Fragment(), IMainFragment {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         val activity = activity as MainActivity
-        communicator = activity as Communicator
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
 
         penyimpananFoto = PenyimpananFoto(requireContext())
         photoList = penyimpananFoto.loadPhotoList().toMutableList()
@@ -49,9 +52,19 @@ class MainFragment : Fragment(), IMainFragment {
         adapter = PhotoListAdapter(activity, photoList)
         listView.adapter = adapter
 
+        penyimpananDetail = PenyimpananDetail(requireContext())
+
+
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
-            communicator.passImageUri2(photo.imageUri)
+            detailList = penyimpananDetail.loadDetailList().toMutableList()
+            val detail = detailList[position]
+            sharedViewModel.imageUri = photo.imageUri
+            sharedViewModel.title = detail.title
+            sharedViewModel.date = photo.tanggal
+            sharedViewModel.desc = detail.desc
+            sharedViewModel.story = detail.story
+            activity.changePage(DetailFragment())
         }
 
         val intentLauncher = registerForActivityResult(
@@ -63,8 +76,8 @@ class MainFragment : Fragment(), IMainFragment {
 
                 activity.changePage(AddDescFragment())
 
-                communicator.passImageUri(imageUri.toString())
-                communicator.passDate(currentDate)
+                sharedViewModel.imageUri = imageUri.toString()
+
             }
         }
 
