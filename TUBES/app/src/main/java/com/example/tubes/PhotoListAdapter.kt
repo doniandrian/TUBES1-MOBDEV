@@ -2,19 +2,21 @@ package com.example.tubes
 
 import android.app.Activity
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.TextView
 
-class PhotoListAdapter(private val activity: Activity, private val portofolioList: MutableList<PhotoItem>) : BaseAdapter() {
+class PhotoListAdapter(private val activity: Activity, private val photoList: MutableList<PhotoItem>) : BaseAdapter() {
 
     override fun getCount(): Int {
-        return portofolioList.size
+        return photoList.size
     }
 
     override fun getItem(i: Int): Any {
-        return portofolioList[i]
+        return photoList[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -28,12 +30,13 @@ class PhotoListAdapter(private val activity: Activity, private val portofolioLis
         val photoItem = getItem(i) as PhotoItem
         val imageUri = Uri.parse(photoItem.imageUri)
         viewHolder.photo.setImageURI(imageUri)
+        viewHolder.tanggal.text = photoItem.tanggal
 
         return view
     }
 
-
     private class ViewHolder(view: View) {
         val photo: ImageView = view.findViewById(R.id.iv_photo)
+        val tanggal: TextView = view.findViewById(R.id.tanggal_foto)
     }
 }

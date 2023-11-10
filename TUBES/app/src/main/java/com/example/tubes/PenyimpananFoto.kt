@@ -1,18 +1,25 @@
 package com.example.tubes
 
 import android.content.Context
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-class PenyimpananFoto(activity: MainActivity) {
-    private val sharedPreferences = activity.getPreferences(Context.MODE_PRIVATE)
+class PenyimpananFoto(context: Context) {
+    val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
-    fun saveImageUri(uri: String) {
-        with (sharedPreferences.edit()) {
-            putString("image_uri", uri)
-            apply()
-        }
+     fun savePhotoList(photoList: List<PhotoItem>) {
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(photoList)
+        editor.putString("photoList", json)
+        editor.apply()
     }
 
-    fun loadImageUri(): String? {
-        return sharedPreferences.getString("image_uri", null)
+    fun loadPhotoList(): List<PhotoItem> {
+        val gson = Gson()
+        val json = sharedPreferences.getString("photoList", null)
+        val type = object : TypeToken<List<PhotoItem>>() {}.type
+        return gson.fromJson(json, type) ?: emptyList()
     }
 }

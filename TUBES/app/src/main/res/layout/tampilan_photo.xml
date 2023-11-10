@@ -24,7 +24,7 @@
                     android:layout_marginTop="130dp"
                     android:textStyle="bold"
                     android:id="@+id/foto_judul"
-                    android:text="@string/judul_foto"
+                    android:text="Default Text"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"
                     android:padding="8dp" />

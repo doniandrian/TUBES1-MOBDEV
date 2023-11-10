@@ -2,15 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1000px"
+        android:layout_height="950px"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/iv_photo_detail"
-        android:src="@drawable/img_icon"/>
+        android:id="@+id/iv_photo_detail" />
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_weight="1"/>
@@ -40,7 +40,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"/>
@@ -61,7 +61,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_weight="1"/>
@@ -75,7 +75,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"/>
@@ -91,7 +91,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"/>
 
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_description"
         android:id="@+id/et_description"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:hint="Description..."
         android:textColorHint="@color/gray"
         android:layout_marginLeft="30dp"
@@ -115,7 +115,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"/>
 
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_story"
         android:id="@+id/et_story"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:hint="Story..."
         android:textColorHint="@color/gray"
         android:layout_marginLeft="30dp"
@@ -139,6 +139,6 @@
         android:id="@+id/btn_edit"
         android:layout_margin="15dp"
         android:src="@android:drawable/ic_menu_edit"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/orange"/>
 
 </RelativeLayout>

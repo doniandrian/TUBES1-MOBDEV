@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.example.tubes.databinding.FragmentDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailFragment : Fragment() {
+    private lateinit var binding : FragmentDetailBinding
     private lateinit var btn_edit: FloatingActionButton
     private lateinit var et_description: EditText
     private lateinit var et_story: EditText
@@ -17,11 +20,11 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
+        binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
 
-        btn_edit = view.findViewById(R.id.btn_edit)
-        et_description = view.findViewById(R.id.et_description)
-        et_story = view.findViewById(R.id.et_story)
+        btn_edit = binding.btnEdit
+        et_description = binding.etDescription
+        et_story = binding.etStory
 
         et_description.isEnabled = false
         et_story.isEnabled = false
@@ -40,6 +43,10 @@ class DetailFragment : Fragment() {
             }
         }
 
-        return view
+        val imageUriString = arguments?.getString("imageUri")
+
+        binding.ivPhotoDetail.setImageURI(imageUriString?.toUri())
+
+        return binding.root
     }
 }
