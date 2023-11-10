@@ -3,17 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/textSettings"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/light_blue"
-            android:gravity="center"
-            android:text="Settings"
-            android:textColor="@color/white"
-            android:textSize="20dp"
 
-    />
 
     <!--    <androidx.appcompat.widget.AppCompatButton-->
     <!--        android:layout_width="match_parent"-->
@@ -30,7 +20,6 @@
             android:id="@+id/containerFontSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textSettings"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
@@ -38,9 +27,9 @@
             android:background="@drawable/border">
 
         <ImageView
-                android:id="@+id/imageFontSize"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+
                 android:src="@drawable/font_size_icon" />
 
         <TextView
@@ -55,6 +44,7 @@
 
 
         <ImageButton
+                android:id="@+id/font_size"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="310dp"
@@ -129,16 +119,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="52dp"
                 android:layout_marginTop="5dp"
-                android:text="Display Time"
+                android:text="Display Date &amp; Time"
                 android:textSize="20dp"
 
         />
 
         <Switch
+                android:id="@+id/switchDisplayTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="305dp"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:checked="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -171,7 +163,7 @@
         />
 
         <ImageButton
-                android:id="@+id/arrowButtonAbout"
+                android:id="@+id/About"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="310dp"
@@ -180,6 +172,15 @@
                 android:scaleType="fitCenter"
                 android:background="@color/transparent"
         />
+        <RelativeLayout
+
+            android:id="@+id/fontpopup"
+            android:layout_width="250dp"
+            android:gravity="center"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true">
+        </RelativeLayout>
+
     </RelativeLayout>
 
 

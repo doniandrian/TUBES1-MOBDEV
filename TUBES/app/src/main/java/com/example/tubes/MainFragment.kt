@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,11 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var communicator: Communicator
     var judul: String? = ""
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +43,7 @@ class MainFragment : Fragment(), IMainFragment {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         val activity = activity as MainActivity
+        activity.toolbar.title = "Photo Diary"
         communicator = activity as Communicator
 
         penyimpananFoto = PenyimpananFoto(requireContext())
@@ -81,6 +88,11 @@ class MainFragment : Fragment(), IMainFragment {
 
         return binding.root
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
 
     override fun updateList(photoList: List<PhotoItem>) {
         adapter.notifyDataSetChanged()
