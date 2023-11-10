@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainFragment2 : Fragment() {
+    private lateinit var binding :MainFragment2
     private lateinit var photoList: MutableList<PhotoItem>
     private lateinit var rv_photo: RecyclerView
     private lateinit var btn_cam: FloatingActionButton
@@ -44,13 +45,6 @@ class MainFragment2 : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main2, container, false)
         val activity = activity as MainActivity
         photoList = mutableListOf()
-        penyimpananFoto = PenyimpananFoto(activity)
-        val savedUri = penyimpananFoto.loadImageUri()
-        if (savedUri != null) {
-            val photoItem = PhotoItem(savedUri)
-            photoList.add(photoItem)
-
-        }
 
         rv_photo = view.findViewById(R.id.rv_photo)
         rv_photo.setHasFixedSize(true)
@@ -68,14 +62,13 @@ class MainFragment2 : Fragment() {
 
 
 
-
+        val tanggal = "2023"
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val photoItem = PhotoItem(imageUri.toString())
+                val photoItem = PhotoItem(imageUri.toString(), tanggal)
                 listPhotoAdapter.addPhoto(photoItem)
-                penyimpananFoto.saveImageUri(imageUri.toString())
             }
         }
 

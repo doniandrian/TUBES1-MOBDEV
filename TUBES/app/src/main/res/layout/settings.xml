@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textSettings"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/light_blue"
-        android:gravity="center"
-        android:text="Settings"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+            android:id="@+id/textSettings"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/light_blue"
+            android:gravity="center"
+            android:text="Settings"
+            android:textColor="@color/white"
+            android:textSize="20dp"
 
-        />
+    />
 
     <!--    <androidx.appcompat.widget.AppCompatButton-->
     <!--        android:layout_width="match_parent"-->
@@ -27,186 +27,159 @@
 
 
     <RelativeLayout
-        android:id="@+id/containerFontSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textSettings"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/border">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/font_size_icon" />
-
-        <TextView
+            android:id="@+id/containerFontSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="10dp"
-            android:text="Font Size"
-            android:textSize="20dp"
-
-            />
-
+            android:layout_below="@id/textSettings"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/border">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="315dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/arrow_right_icon" />
+                android:id="@+id/imageFontSize"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/font_size_icon" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="10dp"
+                android:text="Font Size"
+                android:textSize="20dp"
+
+        />
+
+
+        <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/arrow_right_icon"
+                android:scaleType="fitCenter"
+                android:background="@color/transparent"
+        />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/containerDarkMode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerFontSize"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-32dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        android:paddingLeft="2dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="3dp"
-            android:src="@drawable/dark_mode_icon" />
-
-        <TextView
+            android:id="@+id/containerDarkMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="5dp"
-            android:text="Dark Mode"
-            android:textSize="20dp"
+            android:layout_below="@id/containerFontSize"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-32dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/border"
+            android:paddingLeft="2dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp">
 
-            />
+        <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/dark_mode_icon" />
+
+        <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="5dp"
+                android:text="Dark Mode"
+                android:textSize="20dp"
+
+        />
 
         <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="5dp" />
+                android:id="@+id/switchDarkMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="5dp" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/containerDisplayTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerDarkMode"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/display_time_icon" />
-
-        <TextView
+            android:id="@+id/containerDisplayTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="5dp"
-            android:text="Display Time"
-            android:textSize="20dp"
+            android:layout_below="@id/containerDarkMode"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/border"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp">
 
-            />
+        <ImageView
+
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/display_time_icon" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="5dp"
+                android:text="Display Time"
+                android:textSize="20dp"
+
+        />
 
         <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="305dp"
-            android:layout_marginTop="5dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="305dp"
+                android:layout_marginTop="5dp" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/containerAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerDisplayTime"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/border"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/about_icon" />
-
-        <TextView
+            android:id="@+id/containerAbout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="52dp"
-            android:layout_marginTop="5dp"
-            android:text="About"
-            android:textSize="20dp"
-
-            />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="315dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/arrow_right_icon" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/containerBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerAbout"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/border"
-        android:paddingTop="5dp"
-        android:padding="8dp"
-
-        >
+            android:layout_below="@id/containerDisplayTime"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/border"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="-2dp"
-            android:src="@drawable/background_icon" />
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/about_icon" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:text="Background"
-            android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="52dp"
+                android:layout_marginTop="5dp"
+                android:text="About"
+                android:textSize="20dp"
 
+        />
 
-            />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="308dp"
-            android:src="@drawable/arrow_right_icon" />
-
+        <ImageButton
+                android:id="@+id/arrowButtonAbout"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/arrow_right_icon"
+                android:scaleType="fitCenter"
+                android:background="@color/transparent"
+        />
     </RelativeLayout>
 
 

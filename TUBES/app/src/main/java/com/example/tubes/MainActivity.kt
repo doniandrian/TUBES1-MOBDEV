@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.View
+
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -15,52 +17,110 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tubes.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Communicator{
+    private lateinit var binding : ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+    lateinit var drawer : DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawer = binding.drawerLayout
 
         val abdt = ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer)
         drawer.addDrawerListener(abdt)
         abdt.syncState()
 
-        fragmentTransaction.replace(R.id.fragment_container, MainFragment2())
+        fragmentTransaction.replace(R.id.fragment_container, MainFragment())
+        fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
+        fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
+        drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                return
+            }
 
-        val leftDrawer = findViewById<RelativeLayout>(R.id.left_drawer)
-        val leftFragment = LeftFragment()
-        leftDrawer.setOnClickListener {
-            changePage(leftFragment)
-            drawer.closeDrawer(GravityCompat.START)
-        }
+            override fun onDrawerOpened(drawerView: View) {
 
-        val textHome = findViewById<TextView>(R.id.text_home)
-        textHome.setOnClickListener {
-            changePage(MainFragment())
-            drawer.closeDrawer(GravityCompat.START)
-        }
+                supportFragmentManager.beginTransaction().apply{
+                    show(LeftFragment())
+                    addToBackStack(null)
+                    commit()
+                }
 
-        val textExit = findViewById<TextView>(R.id.text_exit)
-        textExit.setOnClickListener {
-            moveTaskToBack(true)
-            finish()
-        }
+
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+
+                supportFragmentManager.beginTransaction().apply{
+                    hide(LeftFragment())
+                    addToBackStack(null)
+                    commit()
+                }
+
+
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+                return
+            }
+
+
+        })
+
+
+
     }
-
 
     fun changePage(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
+    }
+
+    override fun passImageUri(imageUri: String) {
+        val bundle = Bundle()
+        bundle.putString("imageUri", imageUri)
+
+        val frag2 = AddDescFragment()
+        frag2.arguments = bundle
+    }
+
+    override fun passImageUri2(imageUri: String) {
+        val bundle = Bundle()
+        bundle.putString("imageUri", imageUri)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val frag2 = DetailFragment()
+        frag2.arguments = bundle
+
+        transaction.replace(R.id.fragment_container, frag2)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
+    }
+
+    override fun passDate(date: String) {
+        val bundle = Bundle()
+        bundle.putString("date", date)
+
+        val frag2 = DetailFragment()
+        frag2.arguments = bundle
+    }
+
+    fun closeApplicaton(){
+        this.moveTaskToBack(true)
+        finish()
     }
 }

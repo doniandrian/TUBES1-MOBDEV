@@ -2,27 +2,53 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="600px"
-        android:layout_height="400px"
+        android:layout_width="match_parent"
+        android:layout_height="500px"
         android:layout_centerHorizontal="true"
-        android:id="@+id/iv_photo_add_desc"
-        android:layout_marginTop="40dp" />
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:id="@+id/iv_photo_add_desc" />
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_photo_add_desc"
+            android:id="@+id/text_title"
+            android:text="Title"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@color/black"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"/>
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_title"
+            android:id="@+id/et_title"
+            android:background="@drawable/edit_text_border"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:hint="Title..."
+            android:textColorHint="@color/gray"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_photo_add_desc"
+        android:layout_below="@id/et_title"
         android:id="@+id/text_description"
         android:text="Description"
         android:textSize="20dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"/>
 
@@ -33,7 +59,7 @@
         android:id="@+id/et_description"
         android:background="@drawable/edit_text_border"
         android:padding="15dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:hint="Description..."
         android:textColorHint="@color/gray"
         android:layout_marginTop="10dp"
@@ -49,7 +75,7 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-thin"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp"/>
 
@@ -61,7 +87,7 @@
         android:id="@+id/et_story"
         android:background="@drawable/edit_text_border"
         android:padding="15dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:hint="Story..."
         android:textColorHint="@color/gray"
         android:layout_marginTop="10dp"
@@ -69,14 +95,15 @@
         android:layout_marginRight="30dp"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/btn_save"
-        android:text="Save"
-        android:textSize="20dp"
-        android:padding="15dp"
-        android:backgroundTint="@color/orange"
-        android:layout_margin="20dp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/btn_save"
+            android:text="Save"
+            android:textSize="20dp"
+            android:padding="15dp"
+            android:backgroundTint="@color/orange"
+            android:layout_marginTop="20dp" android:layout_marginStart="20dp" android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>
