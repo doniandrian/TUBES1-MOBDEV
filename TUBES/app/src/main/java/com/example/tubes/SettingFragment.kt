@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Switch
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.tubes.databinding.SettingsBinding
 
@@ -47,6 +48,19 @@ class SettingFragment : Fragment() {
 
         btn_about.setOnClickListener {
             activity.changePage(AboutFragment())
+        }
+        binding.switchDarkMode?.setOnCheckedChangeListener { compundButton, isChecked ->
+            when (isChecked) {
+                true -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+
+                false -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+
+            }
+
         }
 
         return binding.root
