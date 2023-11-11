@@ -2,6 +2,8 @@ package com.example.tubes
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -20,6 +22,10 @@ class DetailFragment : Fragment() {
     private lateinit var et_description: EditText
     private lateinit var et_story: EditText
     private lateinit var sharedViewModel: SharedData
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,5 +71,20 @@ class DetailFragment : Fragment() {
         et_story.setText(story)
 
         return binding.root
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
+        inflater.inflate(R.menu.menu_about, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_list_back -> {
+                val activity = requireActivity() as MainActivity
+                activity.changePage(MainFragment())
+
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

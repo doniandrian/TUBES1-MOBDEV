@@ -1,109 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="500px"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:id="@+id/iv_photo_add_desc" />
+    <RelativeLayout
 
-    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_photo_add_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_photo_add_desc"
-            android:id="@+id/text_title"
-            android:text="Title"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="30dp"/>
+            android:fontFamily="sans-serif-thin"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <EditText
+        <EditText
+            android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_title"
-            android:id="@+id/et_title"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/edit_text_border"
+            android:hint="Title..."
             android:padding="15dp"
             android:textColor="@color/black"
-            android:hint="Title..."
-            android:textColorHint="@color/gray"
-            android:layout_marginTop="10dp"
+            android:textColorHint="@color/gray" />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_title"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_title"
-        android:id="@+id/text_description"
-        android:text="Description"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/black"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_description"
-        android:id="@+id/et_description"
-        android:background="@drawable/edit_text_border"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:hint="Description..."
-        android:textColorHint="@color/gray"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_description"
-        android:id="@+id/text_story"
-        android:text="Story"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/black"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="30dp"/>
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_story"
-        android:id="@+id/et_story"
-        android:background="@drawable/edit_text_border"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:hint="Story..."
-        android:textColorHint="@color/gray"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
-
-    <Button
+        <EditText
+            android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/btn_save"
-            android:text="Save"
-            android:textSize="20dp"
+            android:layout_below="@id/text_description"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Description..."
             android:padding="15dp"
-            android:backgroundTint="@color/orange"
-            android:layout_marginTop="20dp" android:layout_marginStart="20dp" android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/text_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_description"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Story"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/et_story"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_story"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/edit_text_border"
+            android:hint="Story..."
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_story"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/orange"
+            android:padding="15dp"
+            android:text="Save"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+</ScrollView>
