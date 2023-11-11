@@ -13,7 +13,7 @@ import com.example.tubes.databinding.FragmentDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailFragment : Fragment() {
-    private lateinit var binding : FragmentDetailBinding
+    private lateinit var binding: FragmentDetailBinding
     private lateinit var btn_edit: FloatingActionButton
     private lateinit var text_title: TextView
     private lateinit var text_date: TextView
@@ -26,6 +26,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
+
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
 
         btn_edit = binding.btnEdit
         text_title = binding.photoName
@@ -50,8 +52,6 @@ class DetailFragment : Fragment() {
             }
         }
 
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
-
         val imageUri = sharedViewModel.imageUri
         val title = sharedViewModel.title
         val date = sharedViewModel.date
@@ -63,7 +63,6 @@ class DetailFragment : Fragment() {
         text_date.text = date
         et_description.setText(desc)
         et_story.setText(story)
-
 
         return binding.root
     }

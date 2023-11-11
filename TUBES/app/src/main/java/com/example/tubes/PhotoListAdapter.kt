@@ -9,7 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class PhotoListAdapter(private val activity: Activity, private val photoList: MutableList<PhotoItem>, private val detailList: MutableList<DetailItem>) : BaseAdapter() {
+class PhotoListAdapter(private val activity: Activity, private val photoList: MutableList<PhotoItem>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return photoList.size
@@ -17,10 +17,6 @@ class PhotoListAdapter(private val activity: Activity, private val photoList: Mu
 
     override fun getItem(i: Int): Any {
         return photoList[i]
-    }
-
-    fun getItemDetail(i: Int): Any {
-        return detailList[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -32,10 +28,9 @@ class PhotoListAdapter(private val activity: Activity, private val photoList: Mu
         val viewHolder = ViewHolder(view)
 
         val photoItem = getItem(i) as PhotoItem
-        val detailItem = getItemDetail(i) as DetailItem
         val imageUri = Uri.parse(photoItem.imageUri)
         viewHolder.photo.setImageURI(imageUri)
-        viewHolder.judul.text = detailItem.title
+        viewHolder.judul.text = photoItem.title
         viewHolder.tanggal.text = photoItem.tanggal
 
         return view
