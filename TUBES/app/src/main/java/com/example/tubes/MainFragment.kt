@@ -48,16 +48,13 @@ class MainFragment : Fragment(), IMainFragment {
 
         listView = binding.lsPhoto
         btn_cam = binding.btnCam
-
-        adapter = PhotoListAdapter(activity, photoList)
-        listView.adapter = adapter
-
         penyimpananDetail = PenyimpananDetail(requireContext())
-
+        detailList = penyimpananDetail.loadDetailList().toMutableList()
+        adapter = PhotoListAdapter(activity, photoList, detailList)
+        listView.adapter = adapter
 
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
-            detailList = penyimpananDetail.loadDetailList().toMutableList()
             val detail = detailList[position]
             sharedViewModel.imageUri = photo.imageUri
             sharedViewModel.title = detail.title
