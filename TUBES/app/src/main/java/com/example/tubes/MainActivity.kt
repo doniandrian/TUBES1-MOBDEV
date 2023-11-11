@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tubes.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), Communicator{
+class MainActivity : AppCompatActivity(){
     private lateinit var binding : ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -101,35 +101,8 @@ class MainActivity : AppCompatActivity(), Communicator{
         fragmentTransaction.commit()
     }
 
-    override fun passImageUri(imageUri: String) {
-        val bundle = Bundle()
-        bundle.putString("imageUri", imageUri)
 
-        val frag2 = AddDescFragment()
-        frag2.arguments = bundle
-    }
 
-    override fun passImageUri2(imageUri: String) {
-        val bundle = Bundle()
-        bundle.putString("imageUri", imageUri)
-
-        val transaction = this.supportFragmentManager.beginTransaction()
-        val frag2 = DetailFragment()
-        frag2.arguments = bundle
-
-        transaction.replace(R.id.fragment_container, frag2)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
-    }
-
-    override fun passDate(date: String) {
-        val bundle = Bundle()
-        bundle.putString("date", date)
-
-        val frag2 = DetailFragment()
-        frag2.arguments = bundle
-    }
     fun changeFontSize(size: Float){
         //change font size
         textSizeFactor *= size
@@ -155,6 +128,7 @@ class MainActivity : AppCompatActivity(), Communicator{
             }
         }
     }
+
 
     fun closeApplicaton(){
         this.moveTaskToBack(true)
