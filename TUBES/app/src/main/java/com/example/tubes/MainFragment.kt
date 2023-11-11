@@ -54,6 +54,7 @@ class MainFragment : Fragment(), IMainFragment {
 
         adapter = PhotoListAdapter(activity, photoList)
         listView.adapter = adapter
+        presenter = MainPresenter(photoList, detailList,this)
 
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
@@ -70,7 +71,7 @@ class MainFragment : Fragment(), IMainFragment {
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val currentDate = getCurrentDate()
+                val currentDate = presenter.getCurrentDate()
 
                 activity.changePage(AddDescFragment())
 
@@ -95,12 +96,6 @@ class MainFragment : Fragment(), IMainFragment {
 
     override fun updateList(photoList: List<PhotoItem>) {
         adapter.notifyDataSetChanged()
-    }
-
-    private fun getCurrentDate(): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm aaa", Locale.getDefault())
-        return dateFormat.format(currentDate)
     }
 
     override fun onDestroy() {
