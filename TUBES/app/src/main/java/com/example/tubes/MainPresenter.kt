@@ -1,5 +1,6 @@
 package com.example.tubes
 
+import androidx.appcompat.app.AppCompatDelegate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,4 +22,7 @@ class MainPresenter(private var photoList: MutableList<PhotoItem>, private var d
         val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm aaa", Locale.getDefault())
         return dateFormat.format(currentDate)
     }
+
+
+
 }

@@ -15,7 +15,10 @@ class SettingFragment : Fragment() {
     private lateinit var binding: SettingsBinding
     private lateinit var btn_font_size : ImageView
     private lateinit var btn_about : ImageView
-    private lateinit var btn_close : ImageView
+
+
+
+    private lateinit var PenyimpananSetting : PenyimpananSetting
 
 
     private lateinit var switch_dark_mode : Switch
@@ -32,11 +35,14 @@ class SettingFragment : Fragment() {
         switch_dark_mode = binding.switchDarkMode
         switch_display_time = binding.switchDisplayTime
 
-
+        PenyimpananSetting = PenyimpananSetting(requireContext())
 
 
         val activity = requireActivity() as MainActivity
         activity.toolbar.title = "Settings"
+
+        switch_dark_mode.isChecked = PenyimpananSetting.isDarkModeEnabled()
+        switch_display_time.isChecked = PenyimpananSetting.isDisplayDateTimeEnabled()
 
         btn_font_size.setOnClickListener {
             activity.supportFragmentManager.beginTransaction().add(R.id.fontpopup,ListFontSizeFragment()
@@ -49,20 +55,27 @@ class SettingFragment : Fragment() {
         btn_about.setOnClickListener {
             activity.changePage(AboutFragment())
         }
-        binding.switchDarkMode?.setOnCheckedChangeListener { compundButton, isChecked ->
-            when (isChecked) {
-                true -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-
-                false -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-
-            }
+        switch_dark_mode.setOnCheckedChangeListener { compundButton, isChecked ->
+            PenyimpananSetting.setDarkModeEnabled(isChecked)
+            updateAppDarkMode(isChecked)
 
         }
+        binding.switchDisplayTime?.setOnCheckedChangeListener { compoundButton, isChecked ->
+            PenyimpananSetting.setDisplayDateTimeEnabled(isChecked)
+
+            activity.changeDisplayTime(isChecked)
+        }
+
 
         return binding.root
     }
+    fun updateAppDarkMode(isDarkModeEnabled: Boolean) {
+        if (isDarkModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+    }
+
 }

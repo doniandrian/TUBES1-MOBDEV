@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity(){
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
+    var statusdate : Boolean = true
+    //val penyimpananSetting = PenyimpananSetting(this)
     private var textSizeFactor = 1.0f
+    private lateinit var mainPresenter: MainPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +57,10 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
         fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
+
+        //set dark mode
+        //mainPresenter.updateAppDarkMode(penyimpananSetting.isDarkModeEnabled())
+
 
         drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -105,7 +112,7 @@ class MainActivity : AppCompatActivity(){
 
     fun changeFontSize(size: Float){
         //change font size
-        textSizeFactor *= size
+        textSizeFactor = size
 
         // Store textSizeFactor in SharedPreferences
         val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -120,7 +127,7 @@ class MainActivity : AppCompatActivity(){
     }
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
-            val newSize = view.textSize / textSizeFactor
+            val newSize = view.textSize + textSizeFactor
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
         } else if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
@@ -128,6 +135,10 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
+    fun changeDisplayTime(status: Boolean) {
+        statusdate = status
+    }
+
 
 
     fun closeApplicaton(){

@@ -50,7 +50,7 @@ class AddDescFragment : Fragment(), IMainFragment {
         photoList = penyimpananFoto.loadPhotoList().toMutableList()
         detailList = penyimpananDetail.loadDetailList().toMutableList()
 
-        adapter = PhotoListAdapter(activity, photoList)
+        adapter = PhotoListAdapter(activity, photoList,true)
         presenter = MainPresenter(photoList, detailList,this)
 
         val imageUri = sharedViewModel.imageUri

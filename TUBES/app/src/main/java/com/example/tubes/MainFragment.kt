@@ -63,7 +63,7 @@ class MainFragment : Fragment(), IMainFragment {
         photoList = penyimpananFoto.loadPhotoList().toMutableList()
         detailList = penyimpananDetail.loadDetailList().toMutableList()
 
-        adapter = PhotoListAdapter(activity, photoList)
+        adapter = PhotoListAdapter(activity, photoList,activity.statusdate)
         listView.adapter = adapter
         presenter = MainPresenter(photoList, detailList,this)
 
