@@ -47,30 +47,34 @@ class MainFragment : Fragment(), IMainFragment {
 
         val activity = activity as MainActivity
 
+
         activity.toolbar.title = "Photo Diary"
+
 
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
 
 
         penyimpananFoto = PenyimpananFoto(requireContext())
-        photoList = penyimpananFoto.loadPhotoList().toMutableList()
-        presenter = MainPresenter(photoList, this)
+        penyimpananDetail = PenyimpananDetail(requireContext())
 
         listView = binding.lsPhoto
         btn_cam = binding.btnCam
-        penyimpananDetail = PenyimpananDetail(requireContext())
+
+        photoList = penyimpananFoto.loadPhotoList().toMutableList()
         detailList = penyimpananDetail.loadDetailList().toMutableList()
-        adapter = PhotoListAdapter(activity, photoList, detailList)
+
+        adapter = PhotoListAdapter(activity, photoList)
         listView.adapter = adapter
 
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
             val detail = detailList[position]
+
             sharedViewModel.imageUri = photo.imageUri
-            sharedViewModel.title = detail.title
             sharedViewModel.date = photo.tanggal
             sharedViewModel.desc = detail.desc
             sharedViewModel.story = detail.story
+
             activity.changePage(DetailFragment())
         }
 
@@ -78,13 +82,11 @@ class MainFragment : Fragment(), IMainFragment {
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
                 val currentDate = getCurrentDate()
-                presenter.addPhoto(imageUri.toString(), currentDate)
-                penyimpananFoto.savePhotoList(photoList)
 
                 activity.changePage(AddDescFragment())
 
                 sharedViewModel.imageUri = imageUri.toString()
-
+                sharedViewModel.date = currentDate
             }
         }
 
@@ -110,7 +112,6 @@ class MainFragment : Fragment(), IMainFragment {
     override fun updateList(photoList: List<PhotoItem>) {
         adapter.notifyDataSetChanged()
     }
-
 
     private fun getCurrentDate(): String {
         val currentDate = Calendar.getInstance().time
