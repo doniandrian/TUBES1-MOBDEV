@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/containerAll"
+    >
 
 
 
@@ -47,11 +49,12 @@
             android:id="@+id/font_size"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="310dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/arrow_right_icon"
             android:scaleType="fitCenter"
             android:background="@color/transparent"
+            android:layout_alignParentEnd="true"
             />
     </RelativeLayout>
 
@@ -90,8 +93,9 @@
             android:id="@+id/switchDarkMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -128,8 +132,9 @@
             android:id="@+id/switchDisplayTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="305dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
             android:checked="true"/>
     </RelativeLayout>
 
@@ -166,11 +171,12 @@
             android:id="@+id/About"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="310dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/arrow_right_icon"
             android:scaleType="fitCenter"
             android:background="@color/transparent"
+            android:layout_alignParentEnd="true"
             />
         <RelativeLayout
 
@@ -182,6 +188,4 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-
 </RelativeLayout>

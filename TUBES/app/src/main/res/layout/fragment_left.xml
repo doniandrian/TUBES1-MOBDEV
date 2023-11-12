@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="15dp"
-        android:padding="15dp">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
         <TextView
             android:id="@+id/namaAplikasi"
@@ -24,72 +18,82 @@
             android:id="@+id/line4"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="40dp"
             android:background="@drawable/border"
-            android:text="                               "
-            />
+            android:text="                               " />
 
-
-        <ImageView
-            android:id="@+id/home_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/home_icon"
-
-            />
-
-        <TextView
-            android:id="@+id/text_home"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/containerHome"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/namaAplikasi"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="25dp"
-            android:background="@android:color/white"
-            android:text="Home"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
 
-            />
+                <ImageView
+                    android:id="@+id/home_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/home_icon" />
 
-        <ImageView
-            android:id="@+id/settings_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/home_icon"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/settings_icon" />
+                <TextView
+                    android:id="@+id/text_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="3dp"
+                    android:text="Home" />
 
-        <TextView
-            android:id="@+id/text_settings"
-            android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerSettings"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_home"
-            android:layout_marginLeft="40dp"
-            android:layout_marginBottom="25dp"
-            android:background="@android:color/white"
-            android:text="Settings" />
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
-        <ImageView
-            android:id="@+id/exit_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@+id/settings_icon"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/exit_icon" />
+                <ImageView
+                    android:id="@+id/settings_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/settings_icon" />
 
-        <TextView
-            android:id="@+id/text_exit"
-            android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_settings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:text="Settings"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_settings"
-            android:layout_marginStart="41dp"
-            android:background="@color/white"
-            android:text="Exit" />
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/exit_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/exit_icon"
+                    android:layout_marginLeft="3dp"
+                    />
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/text_exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:text="Exit" />
+
+        </LinearLayout>
+
+</LinearLayout>

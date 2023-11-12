@@ -132,13 +132,16 @@
         android:layout_marginRight="30dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/btn_edit"
-        android:layout_margin="15dp"
-        android:src="@android:drawable/ic_menu_edit"
-        android:backgroundTint="@color/orange"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/orange"
+        android:src="@android:drawable/ic_menu_edit" />
 
 </RelativeLayout>
