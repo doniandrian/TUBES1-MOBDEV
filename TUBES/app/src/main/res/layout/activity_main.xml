@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
-            app:title="Tugas Besar"
+            app:title="Photo Diary"
             android:elevation="4dp"
             android:background="@color/purple_700"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -35,7 +35,6 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start">
-        <include layout="@layout/fragment_left" />
     </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

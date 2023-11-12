@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -15,56 +16,78 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
+import androidx.lifecycle.ViewModelProvider
+import com.example.tubes.databinding.FragmentMainBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class MainFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-
+class MainFragment : Fragment(), IMainFragment {
+    private lateinit var binding : FragmentMainBinding
     private lateinit var photoList: MutableList<PhotoItem>
     private lateinit var adapter: PhotoListAdapter
     private lateinit var listView: ListView
     private lateinit var btn_cam: FloatingActionButton
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
+    private lateinit var presenter: MainPresenter
+    private lateinit var sharedViewModel: SharedData
+    private lateinit var detailList: MutableList<DetailItem>
+    private lateinit var penyimpananDetail: PenyimpananDetail
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         val activity = activity as MainActivity
 
-        photoList = mutableListOf()
-        listView = view.findViewById(R.id.ls_photo)
-        btn_cam = view.findViewById(R.id.btn_cam)
 
-        adapter = PhotoListAdapter(activity, photoList)
+        activity.toolbar.title = "Photo Diary"
+
+
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
+
+
+        penyimpananFoto = PenyimpananFoto(requireContext())
+        penyimpananDetail = PenyimpananDetail(requireContext())
+
+        listView = binding.lsPhoto
+        btn_cam = binding.btnCam
+
+        photoList = penyimpananFoto.loadPhotoList().toMutableList()
+        detailList = penyimpananDetail.loadDetailList().toMutableList()
+
+        adapter = PhotoListAdapter(activity, photoList,activity.statusdate)
         listView.adapter = adapter
+        presenter = MainPresenter(photoList, detailList,this)
 
-        // Initialize the PhotoStorageManager
-        penyimpananFoto = PenyimpananFoto(activity)
-        val savedUri = penyimpananFoto.loadImageUri()
-        if (savedUri != null) {
-            val photoItem = PhotoItem(savedUri)
-            photoList.add(photoItem)
-            adapter.notifyDataSetChanged()
+        listView.setOnItemClickListener{ _, _, position, _ ->
+            val photo = photoList[position]
+            val detail = detailList[position]
+
+            sharedViewModel.imageUri = photo.imageUri
+            sharedViewModel.date = photo.tanggal
+            sharedViewModel.desc = detail.desc
+            sharedViewModel.story = detail.story
+
+            activity.changePage(DetailFragment())
         }
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val photoItem = PhotoItem(imageUri.toString())
-                photoList.add(photoItem)
-                adapter.notifyDataSetChanged()
-                penyimpananFoto.saveImageUri(imageUri.toString())
+                val currentDate = presenter.getCurrentDate()
+
+                activity.changePage(AddDescFragment())
+
+                sharedViewModel.imageUri = imageUri.toString()
+                sharedViewModel.date = currentDate
             }
         }
 
@@ -79,17 +102,31 @@ class MainFragment : Fragment() {
             intentLauncher.launch(takePictureIntent)
         }
 
-        return view
+        return binding.root
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
+
+    override fun updateList(photoList: List<PhotoItem>) {
+        adapter.notifyDataSetChanged()
+    }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//
+//        //penyimpananFoto?.savePhotoList(photoList)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_list -> {
-                TODO()
+                // TODO()
             }
             R.id.action_grid -> {
-                TODO()
+                // TODO()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -2,19 +2,22 @@ package com.example.tubes
 
 import android.app.Activity
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.TextView
+import com.example.tubes.databinding.TampilanPhotoBinding
 
-class PhotoListAdapter(private val activity: Activity, private val portofolioList: MutableList<PhotoItem>) : BaseAdapter() {
+class PhotoListAdapter(private val activity: Activity, private val photoList: MutableList<PhotoItem>, private val status: Boolean) : BaseAdapter() {
 
     override fun getCount(): Int {
-        return portofolioList.size
+        return photoList.size
     }
 
     override fun getItem(i: Int): Any {
-        return portofolioList[i]
+        return photoList[i]
     }
 
     override fun getItemId(i: Int): Long {
@@ -22,18 +25,29 @@ class PhotoListAdapter(private val activity: Activity, private val portofolioLis
     }
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
-        val view: View = activity.layoutInflater.inflate(R.layout.tampilan_photo, null)
-        val viewHolder: ViewHolder = ViewHolder(view)
+        val binding = TampilanPhotoBinding.inflate(activity.layoutInflater)
+        val viewHolder = ViewHolder(binding)
 
         val photoItem = getItem(i) as PhotoItem
         val imageUri = Uri.parse(photoItem.imageUri)
-        viewHolder.photo.setImageURI(imageUri)
 
-        return view
+        // Update the views within the ViewHolder
+        viewHolder.updateView(photoItem, imageUri, status)
+
+        return binding.root
     }
 
+    private inner class ViewHolder(private val binding: TampilanPhotoBinding) {
+        private val ivPhoto = binding.ivPhoto
+        private val fotoJudul = binding.fotoJudul
+        private val tanggalFoto = binding.tanggalFoto
 
-    private class ViewHolder(view: View) {
-        val photo: ImageView = view.findViewById(R.id.iv_photo)
+        fun updateView(photoItem: PhotoItem, imageUri: Uri, status: Boolean) {
+            ivPhoto.setImageURI(imageUri)
+            fotoJudul.text = photoItem.title
+            tanggalFoto.text = photoItem.tanggal
+
+            tanggalFoto.visibility = if (status) View.VISIBLE else View.GONE
+        }
     }
 }

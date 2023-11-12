@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/containerAll"
+    >
 
-    <TextView
-        android:id="@+id/textSettings"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/light_blue"
-        android:gravity="center"
-        android:text="Settings"
-        android:textColor="@color/white"
-        android:textSize="20dp"
 
-        />
 
     <!--    <androidx.appcompat.widget.AppCompatButton-->
     <!--        android:layout_width="match_parent"-->
@@ -30,7 +22,6 @@
         android:id="@+id/containerFontSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textSettings"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
@@ -40,6 +31,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+
             android:src="@drawable/font_size_icon" />
 
         <TextView
@@ -53,12 +45,17 @@
             />
 
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="315dp"
+        <ImageButton
+            android:id="@+id/font_size"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/arrow_right_icon" />
+            android:src="@drawable/arrow_right_icon"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"
+            android:layout_alignParentEnd="true"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -82,6 +79,7 @@
             android:src="@drawable/dark_mode_icon" />
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -92,10 +90,13 @@
             />
 
         <Switch
+            android:id="@+id/switchDarkMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -111,6 +112,7 @@
         android:paddingBottom="7dp">
 
         <ImageView
+
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginLeft="12dp"
@@ -122,16 +124,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="52dp"
             android:layout_marginTop="5dp"
-            android:text="Display Time"
+            android:text="Display Date &amp; Time"
             android:textSize="20dp"
 
             />
 
         <Switch
+            android:id="@+id/switchDisplayTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="305dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            android:checked="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -163,51 +168,18 @@
 
             />
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="315dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/arrow_right_icon" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/containerBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/containerAbout"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/border"
-        android:paddingTop="5dp"
-        android:padding="8dp"
-
-        >
-
-        <ImageView
-            android:layout_width="40dp"
+        <ImageButton
+            android:id="@+id/About"
+            android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="-2dp"
-            android:src="@drawable/background_icon" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:text="Background"
-            android:textSize="20dp"
-
-
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/arrow_right_icon"
+            android:scaleType="fitCenter"
+            android:background="@color/transparent"
+            android:layout_alignParentEnd="true"
             />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="308dp"
-            android:src="@drawable/arrow_right_icon" />
+       =
 
     </RelativeLayout>
-
-
 </RelativeLayout>

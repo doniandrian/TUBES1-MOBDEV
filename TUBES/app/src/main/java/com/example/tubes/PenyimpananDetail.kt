@@ -5,21 +5,21 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class PenyimpananFoto(context: Context) {
+class PenyimpananDetail(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
 
-     fun savePhotoList(photoList: List<PhotoItem>) {
+    fun saveDetailList(detailList: List<DetailItem>) {
         val editor = sharedPreferences.edit()
         val gson = Gson()
-        val json = gson.toJson(photoList)
-        editor.putString("photoList", json)
+        val json = gson.toJson(detailList)
+        editor.putString("detailList", json)
         editor.apply()
     }
 
-    fun loadPhotoList(): List<PhotoItem> {
+    fun loadDetailList(): List<DetailItem> {
         val gson = Gson()
-        val json = sharedPreferences.getString("photoList", null)
-        val type = object : TypeToken<List<PhotoItem>>() {}.type
+        val json = sharedPreferences.getString("detailList", null)
+        val type = object : TypeToken<List<DetailItem>>() {}.type
         return gson.fromJson(json, type) ?: emptyList()
     }
 }

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    >
+    android:orientation="vertical"
+    android:translationZ="99dp"
+    android:background="@color/white"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_marginBottom="5dp"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@color/gray_ef"
         android:text="Large"
         android:textAllCaps="false"
         android:textSize="20dp" />
@@ -19,24 +28,20 @@
         android:id="@+id/buttonMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Medium"
-        android:textSize="20dp"
-        android:background="@color/gray_ef"
-        android:textAllCaps="false"
         android:layout_below="@+id/buttonLarge"
         android:layout_marginBottom="10dp"
-        />
+        android:text="Medium"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Small"
-        android:textSize="20dp"
-        android:background="@color/gray_ef"
-        android:textAllCaps="false"
         android:layout_below="@+id/buttonMedium"
-        />
+        android:text="Small"
+        android:textAllCaps="false"
+        android:textSize="20dp" />
 
 
-</RelativeLayout>
+</LinearLayout>
