@@ -18,34 +18,22 @@ class ListFontSizeFragment : Fragment() {
     private lateinit var close : ImageView
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = ListItemFontSizeBinding.inflate(inflater, container, false)
-        small = binding.buttonSmall
-        medium = binding.buttonMedium
-        large = binding.buttonLarge
-        close = binding.close
 
-        val activity = requireActivity() as MainActivity
 
-        small.setOnClickListener {
-            activity.changeFontSize(1.2f)
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-        }
-        medium.setOnClickListener {
-            activity.changeFontSize(1.0f)
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-        }
-        large.setOnClickListener {
-            activity.changeFontSize(0.8f)
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-        }
-        close.setOnClickListener {
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-        }
 
         return binding.root
     }
+    fun setCloseButtonClickListener(listener: () -> Unit) {
+        close.setOnClickListener {
+            listener()
+        }
+    }
+
 }

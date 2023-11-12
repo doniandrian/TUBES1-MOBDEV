@@ -114,10 +114,11 @@ class MainFragment : Fragment(), IMainFragment {
         adapter.notifyDataSetChanged()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        penyimpananFoto.savePhotoList(photoList)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//
+//        //penyimpananFoto?.savePhotoList(photoList)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

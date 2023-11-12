@@ -10,6 +10,7 @@ class PenyimpananSetting(context: Context) {
     // Key for the dark mode setting
     private val DARK_MODE_KEY = "dark_mode"
     private val DisplayDateTimeKey = "display_date_time"
+    private val FontSizeKey = "font_size"
 
     fun isDarkModeEnabled(): Boolean {
         return sharedPreferences.getBoolean(DARK_MODE_KEY, false)
@@ -28,4 +29,14 @@ class PenyimpananSetting(context: Context) {
         editor.putBoolean(DisplayDateTimeKey, enabled)
         editor.apply()
     }
+
+   fun setFontSize(size: String) {
+        editor.putString(FontSizeKey, size)
+        editor.apply()
+    }
+
+    fun getFontSize(): String? {
+        return sharedPreferences.getString(FontSizeKey, "medium")
+    }
+
 }

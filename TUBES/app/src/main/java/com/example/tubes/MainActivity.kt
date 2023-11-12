@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(){
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
     var statusdate : Boolean = true
+    var statusfontsize : String = "large"
     //val penyimpananSetting = PenyimpananSetting(this)
     private var textSizeFactor = 1.0f
     private lateinit var mainPresenter: MainPresenter
@@ -110,9 +111,18 @@ class MainActivity : AppCompatActivity(){
 
 
 
-    fun changeFontSize(size: Float){
+    fun changeFontSize(size: String) {
         //change font size
-        textSizeFactor = size
+        if (statusfontsize != "small" && size == "small"){
+            textSizeFactor = 0.8f
+        }
+        else if (statusfontsize != "medium" && size == "medium"){
+            textSizeFactor = 1.0f
+        }
+        else if (statusfontsize != "large" && size == "large"){
+            textSizeFactor = 1.2f
+        }
+
 
         // Store textSizeFactor in SharedPreferences
         val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -127,7 +137,7 @@ class MainActivity : AppCompatActivity(){
     }
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
-            val newSize = view.textSize + textSizeFactor
+            val newSize = view.textSize * textSizeFactor
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
         } else if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
