@@ -151,9 +151,3 @@ class SettingFragment : Fragment() {
 
 
 }
-
-
-
-
-
-

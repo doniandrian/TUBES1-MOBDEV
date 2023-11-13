@@ -25,25 +25,25 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = AboutContentBinding.inflate(inflater, container, false)
+
         val activity = requireActivity() as MainActivity
+
         activity.toolbar.title = "About"
-
-
 
         return binding.root
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
         inflater.inflate(R.menu.menu_about, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_list_back -> {
                 val activity = requireActivity() as MainActivity
                 activity.changePage(SettingFragment())
-
             }
-
         }
         return super.onOptionsItemSelected(item)
     }

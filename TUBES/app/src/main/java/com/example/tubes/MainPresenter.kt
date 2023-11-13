@@ -23,6 +23,11 @@ class MainPresenter(private var photoList: MutableList<PhotoItem>, private var d
         return dateFormat.format(currentDate)
     }
 
+    fun updateDetail(desc: String, story: String, position: Int){
+        detailList[position].desc = desc
+        detailList[position].story = story
+    }
+
 
 
 }

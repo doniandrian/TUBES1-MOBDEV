@@ -4,23 +4,16 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tubes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(){
@@ -30,15 +23,19 @@ class MainActivity : AppCompatActivity(){
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
     var statusdate : Boolean = true
-    var statusfontsize : String = "large"
+    var statusfontsize : String = "medium"
     //val penyimpananSetting = PenyimpananSetting(this)
     private var textSizeFactor = 1.0f
     private lateinit var mainPresenter: MainPresenter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        //set dark mode kalau di nyalakan
+        if(PenyimpananSetting(this).isDarkModeEnabled()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
         setContentView(binding.root)
 
         toolbar = binding.toolbar
@@ -49,10 +46,6 @@ class MainActivity : AppCompatActivity(){
         val abdt = ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer)
         drawer.addDrawerListener(abdt)
         abdt.syncState()
-
-
-
-
 
         fragmentTransaction.replace(R.id.fragment_container, MainFragment())
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
@@ -69,36 +62,25 @@ class MainActivity : AppCompatActivity(){
             }
 
             override fun onDrawerOpened(drawerView: View) {
-
                 supportFragmentManager.beginTransaction().apply{
                     show(LeftFragment())
                     addToBackStack(null)
                     commit()
                 }
-
-
             }
 
             override fun onDrawerClosed(drawerView: View) {
-
                 supportFragmentManager.beginTransaction().apply{
                     hide(LeftFragment())
                     addToBackStack(null)
                     commit()
                 }
-
-
             }
 
             override fun onDrawerStateChanged(newState: Int) {
                 return
             }
-
-
         })
-
-
-
     }
 
     fun changePage(fragment: Fragment) {
@@ -111,7 +93,10 @@ class MainActivity : AppCompatActivity(){
 
 
 
+
     fun changeFontSize(size: String) {
+
+
         //change font size
         if (statusfontsize != "small" && size == "small"){
             textSizeFactor = 0.8f
@@ -131,13 +116,14 @@ class MainActivity : AppCompatActivity(){
         editor.apply()
         // Re-apply the text size to all views
         updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-
-
-
     }
+
+
+
+
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
-            val newSize = view.textSize * textSizeFactor
+            val newSize = view.textSize + textSizeFactor
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
         } else if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
@@ -148,7 +134,6 @@ class MainActivity : AppCompatActivity(){
     fun changeDisplayTime(status: Boolean) {
         statusdate = status
     }
-
 
 
     fun closeApplicaton(){

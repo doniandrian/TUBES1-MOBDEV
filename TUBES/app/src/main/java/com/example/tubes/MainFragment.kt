@@ -29,11 +29,10 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var btn_cam: FloatingActionButton
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
-    private lateinit var presenter: MainPresenter
+    lateinit var presenter: MainPresenter
     private lateinit var sharedViewModel: SharedData
     private lateinit var detailList: MutableList<DetailItem>
     private lateinit var penyimpananDetail: PenyimpananDetail
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +46,9 @@ class MainFragment : Fragment(), IMainFragment {
 
         val activity = activity as MainActivity
 
-
         activity.toolbar.title = "Photo Diary"
 
-
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
-
 
         penyimpananFoto = PenyimpananFoto(requireContext())
         penyimpananDetail = PenyimpananDetail(requireContext())
@@ -67,6 +63,22 @@ class MainFragment : Fragment(), IMainFragment {
         listView.adapter = adapter
         presenter = MainPresenter(photoList, detailList,this)
 
+        //ambil data dari sharedViewModel
+        if (sharedViewModel.imageUri != null) {
+            val desc = sharedViewModel.desc
+            val story = sharedViewModel.story
+            val position = sharedViewModel.position
+            if (desc != null) {
+                if (story != null) {
+                    presenter.updateDetail(desc, story, position!!)
+                    //save to penyimpananDetail
+                    penyimpananDetail.saveDetailList(detailList)
+
+
+                }
+            }
+        }
+
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
             val detail = detailList[position]
@@ -75,6 +87,7 @@ class MainFragment : Fragment(), IMainFragment {
             sharedViewModel.date = photo.tanggal
             sharedViewModel.desc = detail.desc
             sharedViewModel.story = detail.story
+            sharedViewModel.position = position
 
             activity.changePage(DetailFragment())
         }
@@ -104,31 +117,13 @@ class MainFragment : Fragment(), IMainFragment {
 
         return binding.root
     }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+
 
 
     override fun updateList(photoList: List<PhotoItem>) {
         adapter.notifyDataSetChanged()
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//
-//        //penyimpananFoto?.savePhotoList(photoList)
-//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_list -> {
-                // TODO()
-            }
-            R.id.action_grid -> {
-                // TODO()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 }

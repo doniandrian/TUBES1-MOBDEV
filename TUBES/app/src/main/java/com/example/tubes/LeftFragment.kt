@@ -20,6 +20,7 @@ class LeftFragment : Fragment() {
     ): View? {
         binding = FragmentLeftBinding.inflate(inflater, container, false)
 
+
         iconHome = binding.containerHome
         iconHome.setOnClickListener {
             val activity = activity as MainActivity
