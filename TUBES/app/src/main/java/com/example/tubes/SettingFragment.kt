@@ -116,7 +116,8 @@ class SettingFragment : Fragment() {
 
         small.setOnClickListener {
             val activity = requireActivity() as MainActivity
-
+            activity.sum = activity.textSizeFactor
+            activity.statusBeforeFontSize = activity.statusfontsize
             activity.changeFontSize("small")
             activity.statusfontsize = "small"
             dialog.dismiss()
@@ -124,7 +125,8 @@ class SettingFragment : Fragment() {
         }
         medium.setOnClickListener {
             val activity = requireActivity() as MainActivity
-
+            activity.sum = activity.textSizeFactor
+            activity.statusBeforeFontSize = activity.statusfontsize
             activity.changeFontSize("medium")
             activity.statusfontsize = "medium"
             dialog.dismiss()
@@ -132,7 +134,8 @@ class SettingFragment : Fragment() {
         }
         large.setOnClickListener {
             val activity = requireActivity() as MainActivity
-
+            activity.sum = activity.textSizeFactor
+            activity.statusBeforeFontSize = activity.statusfontsize
             activity.changeFontSize("large")
             activity.statusfontsize = "large"
             dialog.dismiss()

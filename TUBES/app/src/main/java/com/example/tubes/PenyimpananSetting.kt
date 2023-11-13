@@ -3,7 +3,7 @@ package com.example.tubes
 import android.content.Context
 import android.content.SharedPreferences
 
-class PenyimpananSetting(context: Context) {
+class PenyimpananSetting(context:Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
