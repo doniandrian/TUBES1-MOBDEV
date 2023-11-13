@@ -23,6 +23,7 @@ class LeftFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLeftBinding.inflate(inflater, container, false)
+
         textHome = binding.textHome
         textHome.setOnClickListener {
             val activity = activity as MainActivity

@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class PenyimpananDetail(context: Context) {
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("DetailPrefs", Context.MODE_PRIVATE)
 
     fun saveDetailList(detailList: List<DetailItem>) {
         val editor = sharedPreferences.edit()

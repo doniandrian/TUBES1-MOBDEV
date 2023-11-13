@@ -16,7 +16,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
-    private lateinit var btn_edit: FloatingActionButton
     private lateinit var text_title: TextView
     private lateinit var text_date: TextView
     private lateinit var et_description: EditText
@@ -35,7 +34,6 @@ class DetailFragment : Fragment() {
 
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
 
-        btn_edit = binding.btnEdit
         text_title = binding.photoName
         text_date = binding.dateTaken
         et_description = binding.etDescription
@@ -43,21 +41,7 @@ class DetailFragment : Fragment() {
 
         et_description.isEnabled = false
         et_story.isEnabled = false
-
-        btn_edit.setImageResource(android.R.drawable.ic_menu_edit)
-
-        btn_edit.setOnClickListener {
-            if (et_description.isEnabled && et_story.isEnabled) {
-                btn_edit.setImageResource(android.R.drawable.ic_menu_edit)
-                et_description.isEnabled = false
-                et_story.isEnabled = false
-            } else {
-                btn_edit.setImageResource(android.R.drawable.ic_menu_save)
-                et_description.isEnabled = true
-                et_story.isEnabled = true
-            }
-        }
-
+        
         val imageUri = sharedViewModel.imageUri
         val title = sharedViewModel.title
         val date = sharedViewModel.date

@@ -23,12 +23,13 @@ class ListFontSizeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ListItemFontSizeBinding.inflate(inflater, container, false)
+
+        val activity = requireActivity() as MainActivity
+
         small = binding.buttonSmall
         medium = binding.buttonMedium
         large = binding.buttonLarge
         close = binding.close
-
-        val activity = requireActivity() as MainActivity
 
         small.setOnClickListener {
             activity.changeFontSize(1.2f)

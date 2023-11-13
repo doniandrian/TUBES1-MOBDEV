@@ -34,7 +34,6 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var detailList: MutableList<DetailItem>
     private lateinit var penyimpananDetail: PenyimpananDetail
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -47,12 +46,9 @@ class MainFragment : Fragment(), IMainFragment {
 
         val activity = activity as MainActivity
 
-
         activity.toolbar.title = "Photo Diary"
 
-
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
-
 
         penyimpananFoto = PenyimpananFoto(requireContext())
         penyimpananDetail = PenyimpananDetail(requireContext())

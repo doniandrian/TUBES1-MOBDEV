@@ -4,23 +4,15 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tubes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(){
@@ -30,7 +22,6 @@ class MainActivity : AppCompatActivity(){
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
     private var textSizeFactor = 1.0f
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +37,6 @@ class MainActivity : AppCompatActivity(){
         drawer.addDrawerListener(abdt)
         abdt.syncState()
 
-
-
-
-
         fragmentTransaction.replace(R.id.fragment_container, MainFragment())
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
         fragmentTransaction.hide(LeftFragment())
@@ -61,36 +48,25 @@ class MainActivity : AppCompatActivity(){
             }
 
             override fun onDrawerOpened(drawerView: View) {
-
                 supportFragmentManager.beginTransaction().apply{
                     show(LeftFragment())
                     addToBackStack(null)
                     commit()
                 }
-
-
             }
 
             override fun onDrawerClosed(drawerView: View) {
-
                 supportFragmentManager.beginTransaction().apply{
                     hide(LeftFragment())
                     addToBackStack(null)
                     commit()
                 }
-
-
             }
 
             override fun onDrawerStateChanged(newState: Int) {
                 return
             }
-
-
         })
-
-
-
     }
 
     fun changePage(fragment: Fragment) {
@@ -100,8 +76,6 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
-
-
 
     fun changeFontSize(size: Float){
         //change font size
@@ -114,10 +88,8 @@ class MainActivity : AppCompatActivity(){
         editor.apply()
         // Re-apply the text size to all views
         updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-
-
-
     }
+
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
             val newSize = view.textSize / textSizeFactor
@@ -128,7 +100,6 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
-
 
     fun closeApplicaton(){
         this.moveTaskToBack(true)

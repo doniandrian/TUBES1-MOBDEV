@@ -15,8 +15,6 @@ class SettingFragment : Fragment() {
     private lateinit var btn_font_size : ImageView
     private lateinit var btn_about : ImageView
     private lateinit var btn_close : ImageView
-
-
     private lateinit var switch_dark_mode : Switch
     private lateinit var switch_display_time : Switch
 
@@ -26,23 +24,20 @@ class SettingFragment : Fragment() {
 
     ): View? {
         binding = SettingsBinding.inflate(inflater, container, false)
+
+        val activity = requireActivity() as MainActivity
+
+        activity.toolbar.title = "Settings"
+
         btn_font_size = binding.fontSize
         btn_about = binding.About
         switch_dark_mode = binding.switchDarkMode
         switch_display_time = binding.switchDisplayTime
 
-
-
-
-        val activity = requireActivity() as MainActivity
-        activity.toolbar.title = "Settings"
-
         btn_font_size.setOnClickListener {
             activity.supportFragmentManager.beginTransaction().add(R.id.fontpopup,ListFontSizeFragment()
             )
                 .show(ListFontSizeFragment()).commit()
-
-
         }
 
         btn_about.setOnClickListener {
