@@ -23,13 +23,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tubes.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), Communicator{
+class MainActivity : AppCompatActivity(){
     private lateinit var binding : ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
+    var statusdate : Boolean = true
+    var statusfontsize : String = "large"
+    //val penyimpananSetting = PenyimpananSetting(this)
     private var textSizeFactor = 1.0f
+    private lateinit var mainPresenter: MainPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +58,10 @@ class MainActivity : AppCompatActivity(), Communicator{
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
         fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
+
+        //set dark mode
+        //mainPresenter.updateAppDarkMode(penyimpananSetting.isDarkModeEnabled())
+
 
         drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -101,38 +109,20 @@ class MainActivity : AppCompatActivity(), Communicator{
         fragmentTransaction.commit()
     }
 
-    override fun passImageUri(imageUri: String) {
-        val bundle = Bundle()
-        bundle.putString("imageUri", imageUri)
 
-        val frag2 = AddDescFragment()
-        frag2.arguments = bundle
-    }
 
-    override fun passImageUri2(imageUri: String) {
-        val bundle = Bundle()
-        bundle.putString("imageUri", imageUri)
-
-        val transaction = this.supportFragmentManager.beginTransaction()
-        val frag2 = DetailFragment()
-        frag2.arguments = bundle
-
-        transaction.replace(R.id.fragment_container, frag2)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
-    }
-
-    override fun passDate(date: String) {
-        val bundle = Bundle()
-        bundle.putString("date", date)
-
-        val frag2 = DetailFragment()
-        frag2.arguments = bundle
-    }
-    fun changeFontSize(size: Float){
+    fun changeFontSize(size: String) {
         //change font size
-        textSizeFactor *= size
+        if (statusfontsize != "small" && size == "small"){
+            textSizeFactor = 0.8f
+        }
+        else if (statusfontsize != "medium" && size == "medium"){
+            textSizeFactor = 1.0f
+        }
+        else if (statusfontsize != "large" && size == "large"){
+            textSizeFactor = 1.2f
+        }
+
 
         // Store textSizeFactor in SharedPreferences
         val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -147,7 +137,7 @@ class MainActivity : AppCompatActivity(), Communicator{
     }
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
-            val newSize = view.textSize / textSizeFactor
+            val newSize = view.textSize * textSizeFactor
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
         } else if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
@@ -155,6 +145,11 @@ class MainActivity : AppCompatActivity(), Communicator{
             }
         }
     }
+    fun changeDisplayTime(status: Boolean) {
+        statusdate = status
+    }
+
+
 
     fun closeApplicaton(){
         this.moveTaskToBack(true)

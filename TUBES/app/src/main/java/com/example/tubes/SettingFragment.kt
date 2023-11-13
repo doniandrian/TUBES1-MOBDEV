@@ -22,7 +22,10 @@ class SettingFragment : Fragment() {
     private lateinit var binding2: ListItemFontSizeBinding
     private lateinit var btn_font_size : ImageView
     private lateinit var btn_about : ImageView
-    private lateinit var btn_close : ImageView
+
+
+
+    private lateinit var PenyimpananSetting : PenyimpananSetting
 
 
     private lateinit var switch_dark_mode : Switch
@@ -38,39 +41,46 @@ class SettingFragment : Fragment() {
         btn_about = binding.About
         switch_dark_mode = binding.switchDarkMode
         switch_display_time = binding.switchDisplayTime
-        btn_close = binding2.close
 
-
+        PenyimpananSetting = PenyimpananSetting(requireContext())
 
 
         val activity = requireActivity() as MainActivity
         activity.toolbar.title = "Settings"
 
+        switch_dark_mode.isChecked = PenyimpananSetting.isDarkModeEnabled()
+        switch_display_time.isChecked = PenyimpananSetting.isDisplayDateTimeEnabled()
+
         btn_font_size.setOnClickListener {
-            activity.supportFragmentManager.beginTransaction().add(R.id.fontpopup,ListFontSizeFragment()
-            )
-                .show(ListFontSizeFragment()).commit()
-                showDialog()
+
+            showDialog()
 
         }
 
         btn_about.setOnClickListener {
             activity.changePage(AboutFragment())
         }
-        binding.switchDarkMode?.setOnCheckedChangeListener { compundButton, isChecked ->
-            when (isChecked) {
-                true -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-
-                false -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-
-            }
+        switch_dark_mode.setOnCheckedChangeListener { compundButton, isChecked ->
+            PenyimpananSetting.setDarkModeEnabled(isChecked)
+            updateAppDarkMode(isChecked)
 
         }
+        binding.switchDisplayTime?.setOnCheckedChangeListener { compoundButton, isChecked ->
+            PenyimpananSetting.setDisplayDateTimeEnabled(isChecked)
+
+            activity.changeDisplayTime(isChecked)
+        }
+
         return binding.root
+    }
+
+    fun updateAppDarkMode(isDarkModeEnabled: Boolean) {
+        if (isDarkModeEnabled) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
     }
     private fun showDialog() {
         val overlay = View(requireContext())
@@ -83,22 +93,67 @@ class SettingFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
         dialog.setContentView(R.layout.list_item_font_size)
 
         val width = ViewGroup.LayoutParams.MATCH_PARENT
         val height = ViewGroup.LayoutParams.WRAP_CONTENT
         dialog.window?.setLayout(width, height)
 
+        dialog.setCanceledOnTouchOutside(true)
+
+
         val closeButton = dialog.findViewById<ImageView>(R.id.close)
         closeButton.setOnClickListener {
             dialog.dismiss()
             (requireActivity().findViewById<ViewGroup>(android.R.id.content)).removeView(overlay)
         }
+
+        val small = dialog.findViewById<Button>(R.id.buttonSmall)
+        val medium = dialog.findViewById<Button>(R.id.buttonMedium)
+        val large = dialog.findViewById<Button>(R.id.buttonLarge)
+
+        small.setOnClickListener {
+            val activity = requireActivity() as MainActivity
+
+            activity.changeFontSize("small")
+            activity.statusfontsize = "small"
+            dialog.dismiss()
+            (requireActivity().findViewById<ViewGroup>(android.R.id.content)).removeView(overlay)
+        }
+        medium.setOnClickListener {
+            val activity = requireActivity() as MainActivity
+
+            activity.changeFontSize("medium")
+            activity.statusfontsize = "medium"
+            dialog.dismiss()
+            (requireActivity().findViewById<ViewGroup>(android.R.id.content)).removeView(overlay)
+        }
+        large.setOnClickListener {
+            val activity = requireActivity() as MainActivity
+
+            activity.changeFontSize("large")
+            activity.statusfontsize = "large"
+            dialog.dismiss()
+            (requireActivity().findViewById<ViewGroup>(android.R.id.content)).removeView(overlay)
+        }
+
+        dialog.setOnDismissListener {
+            (requireActivity().findViewById<ViewGroup>(android.R.id.content)).removeView(overlay)
+        }
+
         (requireActivity().findViewById<ViewGroup>(android.R.id.content)).addView(overlay)
 
         dialog.show()
     }
 
 
+
 }
+
+
+
+
+
 

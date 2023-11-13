@@ -63,11 +63,12 @@ class MainFragment2 : Fragment() {
 
 
         val tanggal = "2023"
+        val judul = ""
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val photoItem = PhotoItem(imageUri.toString(), tanggal)
+                val photoItem = PhotoItem(imageUri.toString(), judul, tanggal)
                 listPhotoAdapter.addPhoto(photoItem)
             }
         }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
+import androidx.lifecycle.ViewModelProvider
 import com.example.tubes.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,8 +30,9 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
     private lateinit var presenter: MainPresenter
-    private lateinit var communicator: Communicator
-    var judul: String? = ""
+    private lateinit var sharedViewModel: SharedData
+    private lateinit var detailList: MutableList<DetailItem>
+    private lateinit var penyimpananDetail: PenyimpananDetail
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,35 +46,48 @@ class MainFragment : Fragment(), IMainFragment {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         val activity = activity as MainActivity
+
+
         activity.toolbar.title = "Photo Diary"
-        communicator = activity as Communicator
+
+
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
+
 
         penyimpananFoto = PenyimpananFoto(requireContext())
-        photoList = penyimpananFoto.loadPhotoList().toMutableList()
-        presenter = MainPresenter(photoList, this)
+        penyimpananDetail = PenyimpananDetail(requireContext())
 
         listView = binding.lsPhoto
         btn_cam = binding.btnCam
 
-        adapter = PhotoListAdapter(activity, photoList)
+        photoList = penyimpananFoto.loadPhotoList().toMutableList()
+        detailList = penyimpananDetail.loadDetailList().toMutableList()
+
+        adapter = PhotoListAdapter(activity, photoList,activity.statusdate)
         listView.adapter = adapter
+        presenter = MainPresenter(photoList, detailList,this)
 
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
-            communicator.passImageUri2(photo.imageUri)
+            val detail = detailList[position]
+
+            sharedViewModel.imageUri = photo.imageUri
+            sharedViewModel.date = photo.tanggal
+            sharedViewModel.desc = detail.desc
+            sharedViewModel.story = detail.story
+
+            activity.changePage(DetailFragment())
         }
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val currentDate = getCurrentDate()
-                presenter.addPhoto(imageUri.toString(), currentDate)
-                penyimpananFoto.savePhotoList(photoList)
+                val currentDate = presenter.getCurrentDate()
 
                 activity.changePage(AddDescFragment())
 
-                communicator.passImageUri(imageUri.toString())
-                communicator.passDate(currentDate)
+                sharedViewModel.imageUri = imageUri.toString()
+                sharedViewModel.date = currentDate
             }
         }
 
@@ -98,17 +114,11 @@ class MainFragment : Fragment(), IMainFragment {
         adapter.notifyDataSetChanged()
     }
 
-
-    private fun getCurrentDate(): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm aaa", Locale.getDefault())
-        return dateFormat.format(currentDate)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        penyimpananFoto.savePhotoList(photoList)
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//
+//        //penyimpananFoto?.savePhotoList(photoList)
+//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
