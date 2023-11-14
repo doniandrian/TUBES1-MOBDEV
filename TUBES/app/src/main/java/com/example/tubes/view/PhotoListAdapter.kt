@@ -1,14 +1,12 @@
-package com.example.tubes
+package com.example.tubes.view
 
 import android.app.Activity
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
 import com.example.tubes.databinding.TampilanPhotoBinding
+import com.example.tubes.model.PhotoItem
 
 class PhotoListAdapter(private val activity: Activity, private val photoList: MutableList<PhotoItem>, private val status: Boolean) : BaseAdapter() {
 
@@ -31,7 +29,6 @@ class PhotoListAdapter(private val activity: Activity, private val photoList: Mu
         val photoItem = getItem(i) as PhotoItem
         val imageUri = Uri.parse(photoItem.imageUri)
 
-        // Update the views within the ViewHolder
         viewHolder.updateView(photoItem, imageUri, status)
 
         return binding.root

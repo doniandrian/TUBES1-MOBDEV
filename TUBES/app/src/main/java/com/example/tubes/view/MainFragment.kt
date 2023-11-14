@@ -1,14 +1,11 @@
-package com.example.tubes
+package com.example.tubes.view
 
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,8 +15,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
 import androidx.lifecycle.ViewModelProvider
 import com.example.tubes.databinding.FragmentMainBinding
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.tubes.model.DetailItem
+import com.example.tubes.model.PenyimpananDetail
+import com.example.tubes.model.PenyimpananFoto
+import com.example.tubes.model.PhotoItem
+import com.example.tubes.model.SharedData
+import com.example.tubes.presenter.MainPresenter
 
 class MainFragment : Fragment(), IMainFragment {
     private lateinit var binding : FragmentMainBinding
@@ -63,7 +64,6 @@ class MainFragment : Fragment(), IMainFragment {
         listView.adapter = adapter
         presenter = MainPresenter(photoList, detailList,this)
 
-        //ambil data dari sharedViewModel
         if (sharedViewModel.imageUri != null) {
             val desc = sharedViewModel.desc
             val story = sharedViewModel.story
@@ -71,10 +71,7 @@ class MainFragment : Fragment(), IMainFragment {
             if (desc != null) {
                 if (story != null) {
                     presenter.updateDetail(desc, story, position!!)
-                    //save to penyimpananDetail
                     penyimpananDetail.saveDetailList(detailList)
-
-
                 }
             }
         }
@@ -115,16 +112,10 @@ class MainFragment : Fragment(), IMainFragment {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             intentLauncher.launch(takePictureIntent)
         }
-
         return binding.root
     }
-
-
 
     override fun updateList(photoList: List<PhotoItem>) {
         adapter.notifyDataSetChanged()
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.tubes
+package com.example.tubes.view
 
 import android.app.Dialog
 import android.graphics.Color
@@ -13,21 +13,17 @@ import android.widget.ImageView
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.tubes.R
 import com.example.tubes.databinding.ListItemFontSizeBinding
 import com.example.tubes.databinding.SettingsBinding
+import com.example.tubes.model.PenyimpananSetting
 
-
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment(), ISettingFragment.Ui {
     private lateinit var binding: SettingsBinding
     private lateinit var binding2: ListItemFontSizeBinding
     private lateinit var btn_font_size : ImageView
     private lateinit var btn_about : ImageView
-
-
-
     private lateinit var PenyimpananSetting : PenyimpananSetting
-
-
     private lateinit var switch_dark_mode : Switch
     private lateinit var switch_display_time : Switch
     private lateinit var btnPopUp : Button
@@ -43,7 +39,6 @@ class SettingFragment : Fragment() {
         switch_display_time = binding.switchDisplayTime
 
         PenyimpananSetting = PenyimpananSetting(requireContext())
-
 
         val activity = requireActivity() as MainActivity
         activity.toolbar.title = "Settings"
@@ -82,7 +77,7 @@ class SettingFragment : Fragment() {
         }
 
     }
-    private fun showDialog() {
+    fun showDialog() {
         val overlay = View(requireContext())
         overlay.layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,

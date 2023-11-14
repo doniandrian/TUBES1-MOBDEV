@@ -1,4 +1,4 @@
-package com.example.tubes
+package com.example.tubes.model
 
 import android.content.Context
 import android.content.SharedPreferences

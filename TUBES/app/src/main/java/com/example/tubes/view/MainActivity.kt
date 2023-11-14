@@ -1,6 +1,5 @@
-package com.example.tubes
+package com.example.tubes.view
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
@@ -14,7 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.tubes.R
 import com.example.tubes.databinding.ActivityMainBinding
+import com.example.tubes.model.PenyimpananSetting
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(){
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity(){
     var statusBeforeFontSize :String = "medium"
     var textSizeFactor = 30
     var sum : Int = 0
-    private lateinit var mainPresenter: MainPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(){
         if(PenyimpananSetting(this).isDarkModeEnabled()){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+
         statusdate = PenyimpananSetting(this).isDisplayDateTimeEnabled()
 
         setContentView(binding.root)
@@ -46,7 +48,10 @@ class MainActivity : AppCompatActivity(){
 
         drawer = binding.drawerLayout
 
-        val abdt = ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer)
+        val abdt = ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.openDrawer,
+            R.string.closeDrawer
+        )
         drawer.addDrawerListener(abdt)
         abdt.syncState()
 
@@ -54,8 +59,6 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
         fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
-
-
 
         drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -92,18 +95,14 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.commit()
     }
 
-
-
-
     fun changeFontSize(size: String) {
-
-
         if(statusBeforeFontSize=="large" && size=="large"){
 
         }
         else if(statusBeforeFontSize=="medium"&& size=="medium"){
 
-        }else if(statusBeforeFontSize=="small"&& size=="small"){
+        }
+        else if(statusBeforeFontSize=="small"&& size=="small"){
 
         }
         else if (statusBeforeFontSize=="large" && size=="medium"){
@@ -111,34 +110,26 @@ class MainActivity : AppCompatActivity(){
             updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
         }
         else if (statusBeforeFontSize=="large"&& size=="small"){
-
             textSizeFactor = -20
             updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
         }
         else if (statusBeforeFontSize=="medium"&& size=="large"){
-
-            textSizeFactor = 10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }else if(statusBeforeFontSize=="medium"&& size=="small"){
-
-            textSizeFactor = -10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }else if(statusBeforeFontSize=="small"&& size=="large"){
-
-            textSizeFactor = 20
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }else if(statusBeforeFontSize=="small"&& size=="medium"){
-
             textSizeFactor = 10
             updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
         }
-
-
-
+        else if(statusBeforeFontSize=="medium"&& size=="small"){
+            textSizeFactor = -10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if(statusBeforeFontSize=="small"&& size=="large"){
+            textSizeFactor = 20
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if(statusBeforeFontSize=="small"&& size=="medium"){
+            textSizeFactor = 10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
     }
-
-
-
 
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
@@ -150,10 +141,10 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
+
     fun changeDisplayTime(status: Boolean) {
         statusdate = status
     }
-
 
     fun closeApplicaton(){
         this.moveTaskToBack(true)

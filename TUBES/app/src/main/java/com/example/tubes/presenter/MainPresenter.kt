@@ -1,6 +1,8 @@
-package com.example.tubes
+package com.example.tubes.presenter
 
-import androidx.appcompat.app.AppCompatDelegate
+import com.example.tubes.model.DetailItem
+import com.example.tubes.model.PhotoItem
+import com.example.tubes.view.IMainFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +29,4 @@ class MainPresenter(private var photoList: MutableList<PhotoItem>, private var d
         detailList[position].desc = desc
         detailList[position].story = story
     }
-
-
-
 }

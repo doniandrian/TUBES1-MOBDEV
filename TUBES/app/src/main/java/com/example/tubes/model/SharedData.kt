@@ -1,4 +1,4 @@
-package com.example.tubes
+package com.example.tubes.model
 
 import androidx.lifecycle.ViewModel
 class SharedData : ViewModel() {

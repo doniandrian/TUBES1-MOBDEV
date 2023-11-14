@@ -1,7 +1,6 @@
-package com.example.tubes
+package com.example.tubes.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,12 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tubes.databinding.FragmentAddDescriptionBinding
+import com.example.tubes.model.DetailItem
+import com.example.tubes.model.PenyimpananDetail
+import com.example.tubes.model.PenyimpananFoto
+import com.example.tubes.model.PhotoItem
+import com.example.tubes.model.SharedData
+import com.example.tubes.presenter.MainPresenter
 
 class AddDescFragment : Fragment(), IMainFragment {
     private lateinit var binding: FragmentAddDescriptionBinding
@@ -68,8 +73,6 @@ class AddDescFragment : Fragment(), IMainFragment {
 
             presenter.addPhoto(imageUri.toString(), title, currentDate.toString())
             penyimpananFoto.savePhotoList(photoList)
-
-            sharedViewModel.title = title
 
             activity.changePage(MainFragment())
         }
