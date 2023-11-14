@@ -1,6 +1,5 @@
 package com.example.tubes
 
-import androidx.appcompat.app.AppCompatDelegate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +26,4 @@ class MainPresenter(private var photoList: MutableList<PhotoItem>, private var d
         detailList[position].desc = desc
         detailList[position].story = story
     }
-
-
-
 }

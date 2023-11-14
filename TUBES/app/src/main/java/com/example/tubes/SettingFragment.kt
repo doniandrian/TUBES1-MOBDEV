@@ -16,18 +16,12 @@ import androidx.fragment.app.Fragment
 import com.example.tubes.databinding.ListItemFontSizeBinding
 import com.example.tubes.databinding.SettingsBinding
 
-
 class SettingFragment : Fragment() {
     private lateinit var binding: SettingsBinding
     private lateinit var binding2: ListItemFontSizeBinding
     private lateinit var btn_font_size : ImageView
     private lateinit var btn_about : ImageView
-
-
-
     private lateinit var PenyimpananSetting : PenyimpananSetting
-
-
     private lateinit var switch_dark_mode : Switch
     private lateinit var switch_display_time : Switch
     private lateinit var btnPopUp : Button
@@ -43,7 +37,6 @@ class SettingFragment : Fragment() {
         switch_display_time = binding.switchDisplayTime
 
         PenyimpananSetting = PenyimpananSetting(requireContext())
-
 
         val activity = requireActivity() as MainActivity
         activity.toolbar.title = "Settings"
