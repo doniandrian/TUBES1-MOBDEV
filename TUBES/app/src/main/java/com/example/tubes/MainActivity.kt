@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(){
     var statusfontsize : String = "medium"
     var statusBeforeFontSize :String = "medium"
     var textSizeFactor = 30
+    var sum : Int = 0
     private lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
