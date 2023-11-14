@@ -3,6 +3,7 @@ package com.example.tubes
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -85,10 +86,12 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun changePage(fragment: Fragment) {
+        val settingFragment : SettingFragment
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.addToBackStack(null)
+
         fragmentTransaction.commit()
     }
 
@@ -133,8 +136,8 @@ class MainActivity : AppCompatActivity(){
             updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
         }
 
-
-
+        statusBeforeFontSize = size
+        Log.d(statusBeforeFontSize,"status skrng")
     }
 
 
