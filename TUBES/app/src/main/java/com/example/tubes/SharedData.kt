@@ -7,4 +7,5 @@ class SharedData : ViewModel() {
     var title: String? = null
     var desc: String? = null
     var story: String? = null
+    var position: Int? = null
 }

@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.tubes.databinding.ActivityMainBinding
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding : ActivityMainBinding
@@ -21,11 +23,21 @@ class MainActivity : AppCompatActivity(){
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
-    private var textSizeFactor = 1.0f
+    var statusdate by Delegates.notNull<Boolean>()
+    var statusfontsize : String = "medium"
+    var statusBeforeFontSize :String = "medium"
+    var textSizeFactor = 30
+    private lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        //set dark mode kalau di nyalakan
+        if(PenyimpananSetting(this).isDarkModeEnabled()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        statusdate = PenyimpananSetting(this).isDisplayDateTimeEnabled()
+
         setContentView(binding.root)
 
         toolbar = binding.toolbar
@@ -41,6 +53,8 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.add(binding.leftDrawer .id, LeftFragment())
         fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
+
+
 
         drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -77,22 +91,57 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.commit()
     }
 
-    fun changeFontSize(size: Float){
-        //change font size
-        textSizeFactor *= size
 
-        // Store textSizeFactor in SharedPreferences
-        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putFloat("textSizeFactor", textSizeFactor)
-        editor.apply()
-        // Re-apply the text size to all views
-        updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+
+
+    fun changeFontSize(size: String) {
+
+
+        if(statusBeforeFontSize=="large" && size=="large"){
+
+        }
+        else if(statusBeforeFontSize=="medium"&& size=="medium"){
+
+        }else if(statusBeforeFontSize=="small"&& size=="small"){
+
+        }
+        else if (statusBeforeFontSize=="large" && size=="medium"){
+            textSizeFactor = -10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if (statusBeforeFontSize=="large"&& size=="small"){
+
+            textSizeFactor = -20
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if (statusBeforeFontSize=="medium"&& size=="large"){
+
+            textSizeFactor = 10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="medium"&& size=="small"){
+
+            textSizeFactor = -10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="small"&& size=="large"){
+
+            textSizeFactor = 20
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="small"&& size=="medium"){
+
+            textSizeFactor = 10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+
+
+
     }
+
+
+
 
     fun updateTextSizesRecursive(view: View) {
         if (view is TextView) {
-            val newSize = view.textSize / textSizeFactor
+            val newSize = view.textSize + textSizeFactor
             view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
         } else if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
@@ -100,6 +149,10 @@ class MainActivity : AppCompatActivity(){
             }
         }
     }
+    fun changeDisplayTime(status: Boolean) {
+        statusdate = status
+    }
+
 
     fun closeApplicaton(){
         this.moveTaskToBack(true)
