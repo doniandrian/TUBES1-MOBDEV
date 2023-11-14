@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.tubes.databinding.ActivityMainBinding
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding : ActivityMainBinding
@@ -22,10 +23,10 @@ class MainActivity : AppCompatActivity(){
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
-    var statusdate : Boolean = true
+    var statusdate by Delegates.notNull<Boolean>()
     var statusfontsize : String = "medium"
-    //val penyimpananSetting = PenyimpananSetting(this)
-    private var textSizeFactor = 1.0f
+    var statusBeforeFontSize :String = "medium"
+    var textSizeFactor = 30
     private lateinit var mainPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(){
         if(PenyimpananSetting(this).isDarkModeEnabled()){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+        statusdate = PenyimpananSetting(this).isDisplayDateTimeEnabled()
 
         setContentView(binding.root)
 
@@ -52,8 +54,6 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.hide(LeftFragment())
         fragmentTransaction.commit()
 
-        //set dark mode
-        //mainPresenter.updateAppDarkMode(penyimpananSetting.isDarkModeEnabled())
 
 
         drawer.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
@@ -97,25 +97,43 @@ class MainActivity : AppCompatActivity(){
     fun changeFontSize(size: String) {
 
 
-        //change font size
-        if (statusfontsize != "small" && size == "small"){
-            textSizeFactor = 0.8f
+        if(statusBeforeFontSize=="large" && size=="large"){
+
         }
-        else if (statusfontsize != "medium" && size == "medium"){
-            textSizeFactor = 1.0f
+        else if(statusBeforeFontSize=="medium"&& size=="medium"){
+
+        }else if(statusBeforeFontSize=="small"&& size=="small"){
+
         }
-        else if (statusfontsize != "large" && size == "large"){
-            textSizeFactor = 1.2f
+        else if (statusBeforeFontSize=="large" && size=="medium"){
+            textSizeFactor = -10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if (statusBeforeFontSize=="large"&& size=="small"){
+
+            textSizeFactor = -20
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }
+        else if (statusBeforeFontSize=="medium"&& size=="large"){
+
+            textSizeFactor = 10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="medium"&& size=="small"){
+
+            textSizeFactor = -10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="small"&& size=="large"){
+
+            textSizeFactor = 20
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+        }else if(statusBeforeFontSize=="small"&& size=="medium"){
+
+            textSizeFactor = 10
+            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
         }
 
 
-        // Store textSizeFactor in SharedPreferences
-        val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putFloat("textSizeFactor", textSizeFactor)
-        editor.apply()
-        // Re-apply the text size to all views
-        updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
+
     }
 
 

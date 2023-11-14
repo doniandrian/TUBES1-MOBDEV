@@ -84,6 +84,7 @@ class MainFragment : Fragment(), IMainFragment {
             val detail = detailList[position]
 
             sharedViewModel.imageUri = photo.imageUri
+            sharedViewModel.title = photo.title
             sharedViewModel.date = photo.tanggal
             sharedViewModel.desc = detail.desc
             sharedViewModel.story = detail.story
