@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Large"
+        android:text="@string/large"
         android:textAllCaps="false"
         android:textSize="20dp" />
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonLarge"
         android:layout_marginBottom="10dp"
-        android:text="Medium"
+        android:text="@string/medium"
         android:textAllCaps="false"
         android:textSize="20dp" />
 
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonMedium"
-        android:text="Small"
+        android:text="@string/small"
         android:textAllCaps="false"
         android:textSize="20dp" />
 

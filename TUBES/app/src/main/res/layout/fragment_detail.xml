@@ -1,147 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="950px"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/iv_photo_detail" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_photo_detail"
-        android:id="@+id/ll_file">
 
-        <TextView
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_photo_detail"
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:id="@+id/ll_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_file"
-            android:text="File"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/iv_photo_detail">
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-thin"
+                android:text="@string/title2"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/photo_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-thin"
+                android:hint="Photo"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_file">
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-thin"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date_taken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-thin"
+                android:hint="@string/hint_detail"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_date"
             android:layout_marginLeft="30dp"
-            android:layout_weight="1"/>
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/description_det"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-        <TextView
+        <EditText
+            android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/photo_name"
-            android:hint="photo.jpg"
-            android:textColorHint="@color/gray"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_file"
-        android:id="@+id/ll_date">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_date"
-            android:text="Date"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/text_description"
             android:layout_marginLeft="30dp"
-            android:layout_weight="1"/>
+            android:layout_marginRight="30dp"
+            android:hint="@string/description_det_hint"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
 
         <TextView
+            android:id="@+id/text_story"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_description"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Story"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/et_story"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/date_taken"
-            android:hint="..............."
-            android:textColorHint="@color/gray"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-thin"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_below="@id/text_story"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_date"
-        android:id="@+id/text_description"
-        android:text="Description"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_description"
-        android:id="@+id/et_description"
-        android:textColor="@color/black"
-        android:hint="Description..."
-        android:textColorHint="@color/gray"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_description"
-        android:id="@+id/text_story"
-        android:text="Story"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"/>
+            android:hint="@string/story"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_story"
-        android:id="@+id/et_story"
-        android:textColor="@color/black"
-        android:hint="Story..."
-        android:textColorHint="@color/gray"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_edit"
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/orange"
-        android:src="@android:drawable/ic_menu_edit" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/orange"
+            android:src="@android:drawable/ic_menu_edit" />
 
-</RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

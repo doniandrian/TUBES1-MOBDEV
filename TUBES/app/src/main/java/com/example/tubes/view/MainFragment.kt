@@ -1,14 +1,11 @@
-package com.example.tubes
+package com.example.tubes.view
 
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,10 +15,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.ListView
 import androidx.lifecycle.ViewModelProvider
 import com.example.tubes.databinding.FragmentMainBinding
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.tubes.model.DetailItem
+import com.example.tubes.model.PenyimpananDetail
+import com.example.tubes.model.PenyimpananFoto
+import com.example.tubes.model.PhotoItem
+import com.example.tubes.model.SharedData
+import com.example.tubes.presenter.MainPresenter
 
-class MainFragment : Fragment(), IMainFragment {
+class MainFragment : Fragment(){
     private lateinit var binding : FragmentMainBinding
     private lateinit var photoList: MutableList<PhotoItem>
     private lateinit var adapter: PhotoListAdapter
@@ -29,11 +30,10 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var btn_cam: FloatingActionButton
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
-    private lateinit var presenter: MainPresenter
+    private lateinit var mainPresenter: MainPresenter
     private lateinit var sharedViewModel: SharedData
     private lateinit var detailList: MutableList<DetailItem>
     private lateinit var penyimpananDetail: PenyimpananDetail
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +47,9 @@ class MainFragment : Fragment(), IMainFragment {
 
         val activity = activity as MainActivity
 
-
         activity.toolbar.title = "Photo Diary"
 
-
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedData::class.java)
-
 
         penyimpananFoto = PenyimpananFoto(requireContext())
         penyimpananDetail = PenyimpananDetail(requireContext())
@@ -65,16 +62,30 @@ class MainFragment : Fragment(), IMainFragment {
 
         adapter = PhotoListAdapter(activity, photoList,activity.statusdate)
         listView.adapter = adapter
-        presenter = MainPresenter(photoList, detailList,this)
+        mainPresenter = MainPresenter()
+
+        if (sharedViewModel.imageUri != null) {
+            val desc = sharedViewModel.desc
+            val story = sharedViewModel.story
+            val position = sharedViewModel.position
+            if (desc != null) {
+                if (story != null) {
+                    mainPresenter.updateDetail(detailList, desc, story, position!!)
+                    penyimpananDetail.saveDetailList(detailList)
+                }
+            }
+        }
 
         listView.setOnItemClickListener{ _, _, position, _ ->
             val photo = photoList[position]
             val detail = detailList[position]
 
             sharedViewModel.imageUri = photo.imageUri
+            sharedViewModel.title = photo.title
             sharedViewModel.date = photo.tanggal
             sharedViewModel.desc = detail.desc
             sharedViewModel.story = detail.story
+            sharedViewModel.position = position
 
             activity.changePage(DetailFragment())
         }
@@ -82,7 +93,7 @@ class MainFragment : Fragment(), IMainFragment {
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val currentDate = presenter.getCurrentDate()
+                val currentDate = mainPresenter.getCurrentDate()
 
                 activity.changePage(AddDescFragment())
 
@@ -101,34 +112,6 @@ class MainFragment : Fragment(), IMainFragment {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             intentLauncher.launch(takePictureIntent)
         }
-
         return binding.root
-    }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: android.view.MenuInflater) {
-        inflater.inflate(R.menu.menu_main, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-
-    override fun updateList(photoList: List<PhotoItem>) {
-        adapter.notifyDataSetChanged()
-    }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//
-//        //penyimpananFoto?.savePhotoList(photoList)
-//    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_list -> {
-                // TODO()
-            }
-            R.id.action_grid -> {
-                // TODO()
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

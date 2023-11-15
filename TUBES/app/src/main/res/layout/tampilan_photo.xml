@@ -24,7 +24,7 @@
                     android:layout_below="@id/iv_photo"
                     android:layout_marginTop="130dp"
                     android:textStyle="bold"
-                    android:text="Judul Foto"
+                    android:text="@string/judul_foto_tampilan"
                     android:id="@+id/foto_judul"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"
@@ -36,7 +36,7 @@
                     android:id="@+id/tanggal_foto"
                     android:layout_marginTop="150dp"
                     android:padding="8dp"
-                    android:text="Tanggal Foto"
+                    android:text="@string/tanggal_foto"
                     android:textSize="18sp"
                     android:textColor="@color/light_blue_e5"
                     android:textStyle="bold"/>

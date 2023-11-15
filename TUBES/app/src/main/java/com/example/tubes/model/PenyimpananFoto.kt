@@ -1,4 +1,4 @@
-package com.example.tubes
+package com.example.tubes.model
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class PenyimpananFoto(context: Context) {
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("PhotoPrefs", Context.MODE_PRIVATE)
 
      fun savePhotoList(photoList: List<PhotoItem>) {
         val editor = sharedPreferences.edit()
@@ -23,3 +23,6 @@ class PenyimpananFoto(context: Context) {
         return gson.fromJson(json, type) ?: emptyList()
     }
 }
+
+//referensi:
+//https://www.geeksforgeeks.org/how-to-save-arraylist-to-sharedpreferences-in-android/

@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="52dp"
             android:layout_marginTop="10dp"
-            android:text="Font Size"
+            android:text="@string/font_size"
             android:textSize="20dp"
 
             />
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="5dp"
-            android:text="Dark Mode"
+            android:text="@string/dark_mode"
             android:textSize="20dp"
 
             />
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="52dp"
             android:layout_marginTop="5dp"
-            android:text="Display Date &amp; Time"
+            android:text="@string/display_date_amp_time"
             android:textSize="20dp"
 
             />
@@ -163,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="52dp"
             android:layout_marginTop="5dp"
-            android:text="About"
+            android:text="@string/about"
             android:textSize="20dp"
 
             />

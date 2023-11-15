@@ -1,4 +1,4 @@
-package com.example.tubes
+package com.example.tubes.model
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,6 @@ class PenyimpananSetting(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-    // Key for the dark mode setting
     private val DARK_MODE_KEY = "dark_mode"
     private val DisplayDateTimeKey = "display_date_time"
     private val FontSizeKey = "font_size"
