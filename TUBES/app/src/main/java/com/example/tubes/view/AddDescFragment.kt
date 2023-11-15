@@ -16,9 +16,9 @@ import com.example.tubes.model.PenyimpananDetail
 import com.example.tubes.model.PenyimpananFoto
 import com.example.tubes.model.PhotoItem
 import com.example.tubes.model.SharedData
-import com.example.tubes.presenter.MainPresenter
+import com.example.tubes.presenter.AddDescPresenter
 
-class AddDescFragment : Fragment(), IMainFragment {
+class AddDescFragment : Fragment(), IAddDescFragment.Ui {
     private lateinit var binding: FragmentAddDescriptionBinding
     private lateinit var imageView: ImageView
     private lateinit var btn_save: Button
@@ -30,7 +30,7 @@ class AddDescFragment : Fragment(), IMainFragment {
     private lateinit var detailList: MutableList<DetailItem>
     private lateinit var photoList: MutableList<PhotoItem>
     private lateinit var penyimpananFoto: PenyimpananFoto
-    private lateinit var presenter: MainPresenter
+    private lateinit var addDescPresenter: AddDescPresenter
     private lateinit var adapter: PhotoListAdapter
 
     override fun onCreateView(
@@ -56,7 +56,7 @@ class AddDescFragment : Fragment(), IMainFragment {
         detailList = penyimpananDetail.loadDetailList().toMutableList()
 
         adapter = PhotoListAdapter(activity, photoList,true)
-        presenter = MainPresenter(photoList, detailList,this)
+        addDescPresenter = AddDescPresenter()
 
         val imageUri = sharedViewModel.imageUri
         val currentDate = sharedViewModel.date
@@ -68,15 +68,15 @@ class AddDescFragment : Fragment(), IMainFragment {
             val desc = et_desc.text.toString()
             val story = et_story.text.toString()
 
-            presenter.addDetail(desc, story)
+            addDescPresenter.addDetail(detailList, desc, story)
+            updateList(photoList)
             penyimpananDetail.saveDetailList(detailList)
 
-            presenter.addPhoto(imageUri.toString(), title, currentDate.toString())
+            addDescPresenter.addPhoto(photoList, imageUri.toString(), title, currentDate.toString())
             penyimpananFoto.savePhotoList(photoList)
 
             activity.changePage(MainFragment())
         }
-
         return binding.root
     }
 

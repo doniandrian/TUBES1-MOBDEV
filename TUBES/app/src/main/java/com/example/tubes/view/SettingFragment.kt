@@ -49,11 +49,12 @@ class SettingFragment : Fragment(), ISettingFragment.Ui {
         updateAppTheme(PenyimpananSetting.isDarkModeEnabled())
         updateAppDisplayDateTime(PenyimpananSetting.isDisplayDateTimeEnabled())
 
+
         btn_font_size.setOnClickListener {
-
             SettingPresenter.showDialog(requireContext(), activity)
-
         }
+
+
 
         btn_about.setOnClickListener {
             activity.changePage(AboutFragment())
@@ -66,7 +67,7 @@ class SettingFragment : Fragment(), ISettingFragment.Ui {
         binding.switchDisplayTime?.setOnCheckedChangeListener { compoundButton, isChecked ->
             PenyimpananSetting.setDisplayDateTimeEnabled(isChecked)
 
-            activity.changeDisplayTime(isChecked)
+            SettingPresenter.changeDisplayTime(isChecked, activity)
         }
 
         return binding.root
@@ -79,6 +80,4 @@ class SettingFragment : Fragment(), ISettingFragment.Ui {
     override fun updateAppDisplayDateTime(isDisplayDateTimeEnabled: Boolean) {
         switch_display_time.isChecked = isDisplayDateTimeEnabled
     }
-
-
 }

@@ -22,7 +22,7 @@ import com.example.tubes.model.PhotoItem
 import com.example.tubes.model.SharedData
 import com.example.tubes.presenter.MainPresenter
 
-class MainFragment : Fragment(), IMainFragment {
+class MainFragment : Fragment(){
     private lateinit var binding : FragmentMainBinding
     private lateinit var photoList: MutableList<PhotoItem>
     private lateinit var adapter: PhotoListAdapter
@@ -30,7 +30,7 @@ class MainFragment : Fragment(), IMainFragment {
     private lateinit var btn_cam: FloatingActionButton
     private lateinit var imageUri: Uri
     private lateinit var penyimpananFoto: PenyimpananFoto
-    lateinit var presenter: MainPresenter
+    private lateinit var mainPresenter: MainPresenter
     private lateinit var sharedViewModel: SharedData
     private lateinit var detailList: MutableList<DetailItem>
     private lateinit var penyimpananDetail: PenyimpananDetail
@@ -62,7 +62,7 @@ class MainFragment : Fragment(), IMainFragment {
 
         adapter = PhotoListAdapter(activity, photoList,activity.statusdate)
         listView.adapter = adapter
-        presenter = MainPresenter(photoList, detailList,this)
+        mainPresenter = MainPresenter()
 
         if (sharedViewModel.imageUri != null) {
             val desc = sharedViewModel.desc
@@ -70,7 +70,7 @@ class MainFragment : Fragment(), IMainFragment {
             val position = sharedViewModel.position
             if (desc != null) {
                 if (story != null) {
-                    presenter.updateDetail(desc, story, position!!)
+                    mainPresenter.updateDetail(detailList, desc, story, position!!)
                     penyimpananDetail.saveDetailList(detailList)
                 }
             }
@@ -93,7 +93,7 @@ class MainFragment : Fragment(), IMainFragment {
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val currentDate = presenter.getCurrentDate()
+                val currentDate = mainPresenter.getCurrentDate()
 
                 activity.changePage(AddDescFragment())
 
@@ -113,9 +113,5 @@ class MainFragment : Fragment(), IMainFragment {
             intentLauncher.launch(takePictureIntent)
         }
         return binding.root
-    }
-
-    override fun updateList(photoList: List<PhotoItem>) {
-        adapter.notifyDataSetChanged()
     }
 }

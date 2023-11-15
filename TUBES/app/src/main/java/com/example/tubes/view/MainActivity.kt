@@ -16,12 +16,15 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.tubes.R
 import com.example.tubes.databinding.ActivityMainBinding
 import com.example.tubes.model.PenyimpananSetting
+import com.example.tubes.presenter.MainPresenter
 import kotlin.properties.Delegates
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), IMainFragment.Ui{
     private lateinit var binding : ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+    lateinit var penyimpananSetting: PenyimpananSetting
+    private lateinit var mainPresenter: MainPresenter
     lateinit var drawer : DrawerLayout
     lateinit var toolbar : Toolbar
     var statusdate by Delegates.notNull<Boolean>()
@@ -34,12 +37,14 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //set dark mode kalau di nyalakan
-        if(PenyimpananSetting(this).isDarkModeEnabled()){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
 
-        statusdate = PenyimpananSetting(this).isDisplayDateTimeEnabled()
+        penyimpananSetting = PenyimpananSetting(this)
+
+        statusdate = penyimpananSetting.isDisplayDateTimeEnabled()
+
+        mainPresenter = MainPresenter()
+
+        mainPresenter.darkModeEnable(this)
 
         setContentView(binding.root)
 
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity(){
         })
     }
 
-    fun changePage(fragment: Fragment) {
+    override fun changePage(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
@@ -95,59 +100,7 @@ class MainActivity : AppCompatActivity(){
         fragmentTransaction.commit()
     }
 
-    fun changeFontSize(size: String) {
-        if(statusBeforeFontSize=="large" && size=="large"){
-
-        }
-        else if(statusBeforeFontSize=="medium"&& size=="medium"){
-
-        }
-        else if(statusBeforeFontSize=="small"&& size=="small"){
-
-        }
-        else if (statusBeforeFontSize=="large" && size=="medium"){
-            textSizeFactor = -10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-        else if (statusBeforeFontSize=="large"&& size=="small"){
-            textSizeFactor = -20
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-        else if (statusBeforeFontSize=="medium"&& size=="large"){
-            textSizeFactor = 10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-        else if(statusBeforeFontSize=="medium"&& size=="small"){
-            textSizeFactor = -10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-        else if(statusBeforeFontSize=="small"&& size=="large"){
-            textSizeFactor = 20
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-        else if(statusBeforeFontSize=="small"&& size=="medium"){
-            textSizeFactor = 10
-            updateTextSizesRecursive(findViewById<ViewGroup>(android.R.id.content))
-        }
-    }
-
-    fun updateTextSizesRecursive(view: View) {
-        if (view is TextView) {
-            val newSize = view.textSize + textSizeFactor
-            view.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize)
-        } else if (view is ViewGroup) {
-            for (i in 0 until view.childCount) {
-                updateTextSizesRecursive(view.getChildAt(i))
-            }
-        }
-    }
-
-    fun changeDisplayTime(status: Boolean) {
-        statusdate = status
-    }
-
-    fun closeApplicaton(){
-        this.moveTaskToBack(true)
-        finish()
+    override fun closeApplicaton(){
+        mainPresenter.closeApplicaton(this)
     }
 }

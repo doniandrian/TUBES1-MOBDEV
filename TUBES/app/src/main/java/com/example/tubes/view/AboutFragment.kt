@@ -44,5 +44,8 @@ class AboutFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+
+        //referensi:
+        //https://developer.android.com/guide/topics/ui/menus?hl=id
     }
 }

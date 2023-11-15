@@ -1,6 +1,7 @@
 package com.example.tubes.model
 
 import androidx.lifecycle.ViewModel
+
 class SharedData : ViewModel() {
     var imageUri: String? = null
     var date: String? = null

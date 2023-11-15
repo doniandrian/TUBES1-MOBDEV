@@ -23,3 +23,6 @@ class PenyimpananDetail(context: Context) {
         return gson.fromJson(json, type) ?: emptyList()
     }
 }
+
+//referensi:
+//https://www.geeksforgeeks.org/how-to-save-arraylist-to-sharedpreferences-in-android/
