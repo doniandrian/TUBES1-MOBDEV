@@ -21,10 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_photo_add_desc"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Title"
+            android:text="@string/title"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Title..."
+            android:hint="@string/titlehint"
             android:padding="15dp"
             android:textColor="@color/black"
             android:textColorHint="@color/gray" />
@@ -48,10 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/et_title"
-            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="40dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Description"
+            android:text="@string/description"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -65,7 +65,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/edit_text_border"
-            android:hint="Description..."
+            android:hint="@string/descriptionhint"
             android:padding="15dp"
             android:textColor="@color/black"
             android:textColorHint="@color/gray" />
@@ -109,7 +109,7 @@
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/orange"
             android:padding="15dp"
-            android:text="Save"
+            android:text="@string/save2"
             android:textSize="20dp" />
 
     </RelativeLayout>

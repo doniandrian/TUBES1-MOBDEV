@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:background="@android:color/white"
-        android:text="Photo Diary"
+        android:text="@string/judul_photo_diary"
         android:textSize="25dp" />
 
     <TextView
@@ -43,7 +43,7 @@
             android:background="@android:color/white"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="3dp"
-            android:text="Home" />
+            android:text="@string/home" />
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:text="Settings"
+            android:text="@string/settings"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="3dp"
             />
@@ -94,7 +94,7 @@
             android:background="@color/white"
             android:layout_marginTop="3dp"
             android:layout_marginLeft="3dp"
-            android:text="Exit" />
+            android:text="@string/exit" />
 
     </LinearLayout>
 

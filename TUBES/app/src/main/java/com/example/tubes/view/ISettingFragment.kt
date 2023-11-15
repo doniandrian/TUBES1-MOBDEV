@@ -4,6 +4,8 @@ import android.content.Context
 
 interface ISettingFragment {
     interface Ui{
+        fun updateAppTheme(isDarkModeEnabled: Boolean)
+        fun updateAppDisplayDateTime(isDisplayDateTimeEnabled: Boolean)
 
     }
     interface Presenter{

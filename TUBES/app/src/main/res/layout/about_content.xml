@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="Photo Diary"
+        android:text="@string/photo_diary"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -26,8 +26,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Photo Diary adalah aplikasi yang dapat membantu untuk menyimpan dan berinteraksi dengan foto Anda.
-Aplikasi ini dapat berfungsi untuk menyimpan gambar dari kamera ponsel, galeri penyimpanan foto, serta buku harian untuk setiap foto Anda."
+        android:text="@string/deskripsi"
 
         android:textSize="17dp"
         android:textStyle="bold" />
@@ -42,7 +41,7 @@ Aplikasi ini dapat berfungsi untuk menyimpan gambar dari kamera ponsel, galeri p
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
 
-        android:text="Author :\nDoni Andrian \nAldi Rivandi \nKevin Jo"
+        android:text="@string/author"
         android:textSize="17dp"
         android:textStyle="italic"
         android:gravity="center"
